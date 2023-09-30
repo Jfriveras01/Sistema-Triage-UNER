@@ -4,7 +4,7 @@
 
 package com.miapp.triage;
 import com.miapp.triage.gui.Login;
-
+import com.miapp.triage.persistence.ControladoraPersistencia;
 /**
  *
  * @author Fran
@@ -16,5 +16,10 @@ public class Triage {
         Login log = new Login();
         log.setVisible(true);
         log.setLocationRelativeTo(null);
+        
+        ControladoraPersistencia controlPersis= new ControladoraPersistencia();
     }
+    
+    
+    
 }
