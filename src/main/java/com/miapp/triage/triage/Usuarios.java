@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuarios implements Serializable {
@@ -14,15 +15,17 @@ public class Usuarios implements Serializable {
     private int id;
     private String username;
     private String password;
+    @OneToOne
+    private Rol unRol;
 
     public Usuarios(){
 
     }
 
-    public Usuarios(int id, String username, String password) {
-        this.id = id;
+    public Usuarios(String username, String password, Rol unrol) {
         this.username = username;
         this.password = password;
+        this.unRol = unrol;
     }
 
 
@@ -49,4 +52,14 @@ public class Usuarios implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Rol getUnrol() {
+        return unRol;
+    }
+
+    public void setUnrol(Rol unrol) {
+        this.unRol = unrol;
+    }
+    
+    
 }

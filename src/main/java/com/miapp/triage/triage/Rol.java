@@ -1,13 +1,21 @@
 package com.miapp.triage.triage;
 import java.util.List;
+import javax.persistence.OneToMany;
 public class Rol {
 
+    private int id;
+    private String NombreRol;
     private String Descripcion;
     private List<Funcionario> Funcionario;
+    @OneToMany
+    private List<Usuarios> Usuarios;
 
-    public Rol(String descripcion, List<Funcionario> funcionario) {
+    public Rol(int id,String NombreRol, String descripcion, List<Funcionario> funcionario, List<Usuarios> usuarios) {
+        this.id = id;
+        this.NombreRol = NombreRol;
         Descripcion = descripcion;
         Funcionario = funcionario;
+        Usuarios = usuarios;
     }
 
     public Rol(){
@@ -15,6 +23,15 @@ public class Rol {
     }
 
     //GETTERS Y SETTERS
+
+    public List<Usuarios> getUsuarios() {
+        return Usuarios;
+    }
+
+    public void setUsuarios(List<Usuarios> Usuarios) {
+        this.Usuarios = Usuarios;
+    }
+    
 
     public String getDescripcion() {
 
