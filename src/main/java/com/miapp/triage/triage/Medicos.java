@@ -14,15 +14,16 @@ public class Medicos extends Funcionario{
     private Triage triage;
 
     private List<Consulta> Consulta;
-        
-    public Medicos(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo, List<Rol> Rol, int matricula, List<Especialidad> especialidad, List<BoxAtencion> boxAtencion, Triage triag, List<Consulta> consulta) {
-        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo, Rol);
-        Matricula = matricula;
-        Especialidad = especialidad;
-        BoxAtencion = boxAtencion;
-        triage = triag;
-        Consulta = consulta; 
+
+    public Medicos(int Matricula, List<Especialidad> Especialidad, List<BoxAtencion> BoxAtencion, Triage triage, List<Consulta> Consulta, int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
+        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
+        this.Matricula = Matricula;
+        this.Especialidad = Especialidad;
+        this.BoxAtencion = BoxAtencion;
+        this.triage = triage;
+        this.Consulta = Consulta;
     }
+   
 
     public Medicos() {
 

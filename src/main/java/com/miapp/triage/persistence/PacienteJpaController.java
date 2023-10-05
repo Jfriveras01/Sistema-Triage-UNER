@@ -29,8 +29,8 @@ public class PacienteJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
     
-    public PacienteJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("com.miapp_Triage_jar_1.0-SNAPSHOTPU");
+    public PacienteJpaController(){
+      emf= Persistence.createEntityManagerFactory("com.miapp_Triage_jar_1.0-SNAPSHOTPU");
     }
 
     public EntityManager getEntityManager() {

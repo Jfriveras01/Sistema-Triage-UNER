@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Consulta implements Serializable {
@@ -15,7 +17,7 @@ public class Consulta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_consulta;
-    
+    @Temporal(TemporalType.DATE)
     private Date Fecha;
     private int Hora;
     private String Diagnostico;
@@ -23,7 +25,7 @@ public class Consulta implements Serializable {
     private String DiagClinico;
     private BoxAtencion boxAtencion;
     @ManyToOne
-    @JoinColumn(name="id_consulta")
+    @JoinColumn(name="id_consulta", referencedColumnName = "ID_CONSULTA")
     private Paciente consul;
 
     private Medicos medico;
@@ -56,8 +58,6 @@ public class Consulta implements Serializable {
     public void setId_consulta(int id_consulta) {
         this.id_consulta = id_consulta;
     }
-    
-    
 
     public Date getFecha() {
         return Fecha;
@@ -111,9 +111,10 @@ public class Consulta implements Serializable {
         return consul;
     }
 
-    public void setConsul(Paciente paciente) {
-        this.consul = paciente;
+    public void setConsul(Paciente consul) {
+        this.consul = consul;
     }
+
 
     public Triage getTriage() {
         return triage;

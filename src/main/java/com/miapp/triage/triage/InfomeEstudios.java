@@ -16,7 +16,6 @@ public class InfomeEstudios implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     private int id_informe;
     private String TipoEstudio;
     @Temporal(TemporalType.DATE)
@@ -27,12 +26,12 @@ public class InfomeEstudios implements Serializable {
     @JoinColumn(name="id_informe")
     private Paciente informe;
 
-    public InfomeEstudios(int id_info, String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente informe) {
+    public InfomeEstudios(int id_info, String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente infor) {
         id_informe = id_info;
         TipoEstudio = tipoEstudio;
         FechaEstudio = fechaEstudio;
         InformeRealizado = informeRealizado;
-        this.informe = informe;
+        informe = infor;
     }
     public InfomeEstudios(){
 
@@ -47,6 +46,8 @@ public class InfomeEstudios implements Serializable {
     public void setId_informe(int id_informe) {
         this.id_informe = id_informe;
     }
+
+    
     
     public String getTipoEstudio() {
         return TipoEstudio;
@@ -76,8 +77,10 @@ public class InfomeEstudios implements Serializable {
         return informe;
     }
 
-    public void setInforme(Paciente paciente) {
-        this.informe = paciente;
+    public void setInforme(Paciente informe) {
+        this.informe = informe;
     }
+
+   
 
 }

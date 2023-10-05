@@ -15,6 +15,7 @@ import com.miapp.triage.triage.Paciente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -27,6 +28,10 @@ public class BoxAtencionJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
 
+    public BoxAtencionJpaController() {
+        emf = Persistence.createEntityManagerFactory("com.miapp_Triage_jar_1.0-SNAPSHOTPU");
+    }
+    
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
