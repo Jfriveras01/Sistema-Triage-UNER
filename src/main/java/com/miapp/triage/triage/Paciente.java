@@ -1,27 +1,39 @@
 package com.miapp.triage.triage;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-public class Paciente extends Persona{
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
+public class Paciente extends Persona implements Serializable{
 
     private int Numcontacto;
 
+    @OneToMany(mappedBy="informe")
     private List<InfomeEstudios> InformeEstudios;
 
+    @OneToMany(mappedBy="consul")
     private List<Consulta> Consulta;
 
+    @OneToOne
     private Triage triage;
+    
+    @OneToOne
     private BoxAtencion boxAtencion;
+    
     public Paciente() {
     }
 
-    public Paciente(String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo, int numcontacto, List<InfomeEstudios> informeEstudios, List<Consulta> consulta, Triage triag, BoxAtencion boxatencion) {
-        super(nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
-        Numcontacto = numcontacto;
-        InformeEstudios = informeEstudios;
-        Consulta = consulta;
-        triage = triag;
-        boxAtencion = boxatencion;
+    public Paciente(int Numcontacto, List<InfomeEstudios> InformeEstudios, List<Consulta> Consulta, Triage triage, BoxAtencion boxAtencion, int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
+        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
+        this.Numcontacto = Numcontacto;
+        this.InformeEstudios = InformeEstudios;
+        this.Consulta = Consulta;
+        this.triage = triage;
+        this.boxAtencion = boxAtencion;
     }
 
     //GETTERS Y SETTERS

@@ -1,16 +1,27 @@
 package com.miapp.triage.triage;
+import java.io.Serializable;
 import java.util.List;
-public class BoxAtencion {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
+public class BoxAtencion implements Serializable {
 
 
-    private int ID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_box;
     private boolean Estado;
     private List<Medicos> Medicos;
     private List<Consulta> Consulta;
+    @OneToOne
     private Paciente paciente;
 
-    public BoxAtencion(int ID, boolean estado, List<Medicos> medicos, List<Consulta> consulta, Paciente pacient) {
-        this.ID = ID;
+    public BoxAtencion(int id, boolean estado, List<Medicos> medicos, List<Consulta> consulta, Paciente pacient) {
+        this.id_box = id;
         Estado = estado;
         Medicos = medicos;
         Consulta = consulta;
@@ -22,12 +33,12 @@ public class BoxAtencion {
     }
 
     //GETTERS Y SETTERS
-    public int getID() {
-        return ID;
+    public int getId_box() {
+        return id_box;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId_box(int ID) {
+        this.id_box = ID;
     }
 
     public boolean isEstado() {

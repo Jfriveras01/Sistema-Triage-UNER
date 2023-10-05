@@ -1,14 +1,25 @@
 package com.miapp.triage.triage;
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Persona {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Persona implements Serializable {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String nombre;
     private String apellido;
-
-
-
+    @Temporal(TemporalType.DATE)
     private Date FechaNac;
     private int DNI;
     private int Telfijo;
@@ -16,7 +27,7 @@ public class Persona {
     private String Estcivil;
     private String correo;
 
-    public Persona(String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
+    public Persona(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
         this.nombre = nombre;
         this.apellido = apellido;
         FechaNac = fechaNac;
@@ -33,6 +44,14 @@ public class Persona {
 
     //GETTERS Y SETTERS
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNombre() {
         return nombre;
     }

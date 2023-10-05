@@ -2,6 +2,7 @@ package com.miapp.triage.triage;
 import java.util.Date;
 import java.util.List;
 
+
 public class Funcionario extends Persona{
 
 
@@ -10,8 +11,8 @@ public class Funcionario extends Persona{
     public Funcionario() {
     }
 
-    public Funcionario(String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo, List<Rol> rol) {
-        super(nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
+    public Funcionario(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo, List<Rol> rol) {
+        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
         Rol = rol;
     }
 

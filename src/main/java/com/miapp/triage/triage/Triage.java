@@ -1,7 +1,18 @@
 package com.miapp.triage.triage;
+import java.io.Serializable;
 import java.util.List;
-public class Triage {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
+public class Triage implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_triage;
     private int PuntuacionRespiracion;
     private int PuntuacionPulso;
     private int PuntuacionEstMental;
@@ -20,12 +31,14 @@ public class Triage {
     private String MotivoCambio;
     private int FechaCambio;
     private int HoraDelCambio;
+    @OneToOne
     private Paciente paciente;
     private Consulta consulta;
     private List<PersonalEnfermeria> Enfermeria;
     private List<Medicos> Medico;
 
-    public Triage(int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, List<PersonalEnfermeria> enfermeria, List<Medicos> medico) {
+    public Triage(int id_triag, int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, List<PersonalEnfermeria> enfermeria, List<Medicos> medico) {
+        id_triage = id_triag;
         PuntuacionRespiracion = puntuacionRespiracion;
         PuntuacionPulso = puntuacionPulso;
         PuntuacionEstMental = puntuacionEstMental;
@@ -56,6 +69,14 @@ public class Triage {
 
     //GETTERS Y SETTERS
 
+    public int getId_triage() {
+        return id_triage;
+    }
+
+    public void setId_triage(int id_triage) {
+        this.id_triage = id_triage;
+    }
+    
     public int getPuntuacionRespiracion() {
         return PuntuacionRespiracion;
     }

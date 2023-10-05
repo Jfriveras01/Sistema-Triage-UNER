@@ -14,9 +14,9 @@ public class Medicos extends Funcionario{
     private Triage triage;
 
     private List<Consulta> Consulta;
-
-    public Medicos(String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo, List<Rol> Rol, int matricula, List<Especialidad> especialidad, List<BoxAtencion> boxAtencion, Triage triag, List<Consulta> consulta) {
-        super(nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo, Rol);
+        
+    public Medicos(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo, List<Rol> Rol, int matricula, List<Especialidad> especialidad, List<BoxAtencion> boxAtencion, Triage triag, List<Consulta> consulta) {
+        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo, Rol);
         Matricula = matricula;
         Especialidad = especialidad;
         BoxAtencion = boxAtencion;

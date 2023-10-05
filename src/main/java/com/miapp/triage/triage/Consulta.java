@@ -1,31 +1,44 @@
 package com.miapp.triage.triage;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-public class Consulta {
+@Entity
+public class Consulta implements Serializable {
 
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_consulta;
+    
     private Date Fecha;
     private int Hora;
     private String Diagnostico;
     private String Lugar;
     private String DiagClinico;
     private BoxAtencion boxAtencion;
-    private Paciente paciente;
+    @ManyToOne
+    @JoinColumn(name="id_consulta")
+    private Paciente consul;
 
     private Medicos medico;
 
     private Triage triage;
 
-    public Consulta(Date fecha, int hora, String diagnostico, String lugar, String diagClinico, BoxAtencion boxatencion, Paciente pacient, Triage triag, Medicos medic) {
+    public Consulta(int id_consul,Date fecha, int hora, String diagnostico, String lugar, String diagClinico, BoxAtencion boxatencion, Paciente consu, Triage triag, Medicos medic) {
+        id_consulta = id_consul;
         Fecha = fecha;
         Hora = hora;
         Diagnostico = diagnostico;
         Lugar = lugar;
         DiagClinico = diagClinico;
         boxAtencion = boxatencion;
-        paciente = pacient;
+        consul = consu;
         triage = triag;
         medico = medic;
     }
@@ -35,6 +48,16 @@ public class Consulta {
     }
 
     //GETTERS Y SETTERS
+
+    public int getId_consulta() {
+        return id_consulta;
+    }
+
+    public void setId_consulta(int id_consulta) {
+        this.id_consulta = id_consulta;
+    }
+    
+    
 
     public Date getFecha() {
         return Fecha;
@@ -84,12 +107,12 @@ public class Consulta {
         this.boxAtencion = boxAtencion;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Paciente getConsul() {
+        return consul;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setConsul(Paciente paciente) {
+        this.consul = paciente;
     }
 
     public Triage getTriage() {

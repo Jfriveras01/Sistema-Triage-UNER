@@ -1,23 +1,38 @@
 package com.miapp.triage.triage;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+public class InfomeEstudios implements Serializable {
 
-public class InfomeEstudios {
-
-
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private int id_informe;
     private String TipoEstudio;
+    @Temporal(TemporalType.DATE)
     private Date FechaEstudio;
     private String InformeRealizado;
-    private Paciente paciente;
+    
+    @ManyToOne
+    @JoinColumn(name="id_informe")
+    private Paciente informe;
 
-    public InfomeEstudios(String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente paciente) {
+    public InfomeEstudios(int id_info, String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente informe) {
+        id_informe = id_info;
         TipoEstudio = tipoEstudio;
         FechaEstudio = fechaEstudio;
         InformeRealizado = informeRealizado;
-        this.paciente = paciente;
+        this.informe = informe;
     }
     public InfomeEstudios(){
 
@@ -25,6 +40,14 @@ public class InfomeEstudios {
 
     //GETTERS Y SETTERS
 
+    public int getId_informe() {
+        return id_informe;
+    }
+
+    public void setId_informe(int id_informe) {
+        this.id_informe = id_informe;
+    }
+    
     public String getTipoEstudio() {
         return TipoEstudio;
     }
@@ -49,12 +72,12 @@ public class InfomeEstudios {
         InformeRealizado = informeRealizado;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Paciente getInforme() {
+        return informe;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setInforme(Paciente paciente) {
+        this.informe = paciente;
     }
 
 }
