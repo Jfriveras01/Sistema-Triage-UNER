@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,7 +26,7 @@ public class Consulta implements Serializable {
     private String DiagClinico;
     private BoxAtencion boxAtencion;
     @ManyToOne
-    @JoinColumn(name="id_consulta", referencedColumnName = "ID_CONSULTA")
+    @PrimaryKeyJoinColumn(name="id_consulta")
     private Paciente consul;
 
     private Medicos medico;

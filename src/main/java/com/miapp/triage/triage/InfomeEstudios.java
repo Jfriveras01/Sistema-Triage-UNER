@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,7 +24,7 @@ public class InfomeEstudios implements Serializable {
     private String InformeRealizado;
     
     @ManyToOne
-    @JoinColumn(name="id_informe")
+    @PrimaryKeyJoinColumn(name="id_informe")
     private Paciente informe;
 
     public InfomeEstudios(int id_info, String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente infor) {
@@ -46,8 +47,6 @@ public class InfomeEstudios implements Serializable {
     public void setId_informe(int id_informe) {
         this.id_informe = id_informe;
     }
-
-    
     
     public String getTipoEstudio() {
         return TipoEstudio;
