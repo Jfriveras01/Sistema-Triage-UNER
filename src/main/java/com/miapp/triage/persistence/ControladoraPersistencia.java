@@ -5,12 +5,15 @@ import com.miapp.triage.triage.Paciente;
 
 public class ControladoraPersistencia {
   
-    BoxAtencionJpaController boxJPA = new BoxAtencionJpaController();
-    ConsultaJpaController consulJPA = new ConsultaJpaController();
-    InfomeEstudiosJpaController infoJPA = new InfomeEstudiosJpaController();
+    
+    AdministradorSistemaJpaController admin= new AdministradorSistemaJpaController();
+    FuncionarioAdministrativoJpaController funcioadmin= new FuncionarioAdministrativoJpaController();
+    FuncionarioJpaController funcio = new FuncionarioJpaController();
+    MedicosJpaController med = new  MedicosJpaController();
+    PersonalEnfermeriaJpaController perso = new PersonalEnfermeriaJpaController();
     PacienteJpaController paciJPA = new PacienteJpaController();
     PersonaJpaController persoJPA = new PersonaJpaController();
-    UsuariosJpaController usuJPA = new UsuariosJpaController();
+    
     
     public ControladoraPersistencia(){
         
@@ -19,4 +22,7 @@ public class ControladoraPersistencia {
     public void crearPaciente(Paciente paci) {
        paciJPA.create(paci);
     }
+    
+    
+    
 }

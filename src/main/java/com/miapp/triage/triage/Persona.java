@@ -1,4 +1,5 @@
 package com.miapp.triage.triage;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -11,11 +12,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Persona implements Serializable {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public class Persona implements Serializable  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private String apellido;

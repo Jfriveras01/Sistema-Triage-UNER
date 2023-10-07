@@ -1,16 +1,20 @@
 package com.miapp.triage.triage;
 import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 public class Especialidad {
 
     private String nombre;
     private int Cod;
 
-    private List<Medicos> Medicos;
+    @ManyToOne
+    @JoinColumn(name="cod")
+    private Medicos medico;
 
-    public Especialidad(String nombre, int cod, List<Medicos> medicos) {
+    public Especialidad(String nombre, int cod, Medicos medico) {
         this.nombre = nombre;
-        Cod = cod;
-        Medicos = medicos;
+        this.Cod = cod;
+        this.medico = medico;
     }
 
     public Especialidad(){
@@ -38,11 +42,11 @@ public class Especialidad {
         Cod = cod;
     }
 
-    public List<Medicos> getMedicos() {
-        return Medicos;
+    public Medicos getMedicos() {
+        return medico;
     }
 
-    public void setMedicos(List<Medicos> medicos) {
-        Medicos = medicos;
+    public void setMedicos(Medicos medico) {
+        this.medico = medico;
     }
 }

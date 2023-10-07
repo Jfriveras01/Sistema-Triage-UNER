@@ -2,37 +2,30 @@ package com.miapp.triage.triage;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-@Entity
+
 public class InfomeEstudios implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id_informe;
     private String TipoEstudio;
-    @Temporal(TemporalType.DATE)
+  
     private Date FechaEstudio;
     private String InformeRealizado;
     
+  
     @ManyToOne
-    @PrimaryKeyJoinColumn(name="id_informe")
-    private Paciente informe;
+    @JoinColumn(name="id_informe")
+    private Paciente paciente;
 
-    public InfomeEstudios(int id_info, String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente infor) {
+    public InfomeEstudios(int id_info, String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente paciente) {
         id_informe = id_info;
         TipoEstudio = tipoEstudio;
         FechaEstudio = fechaEstudio;
         InformeRealizado = informeRealizado;
-        informe = infor;
+        this.paciente = paciente;
     }
     public InfomeEstudios(){
 
@@ -73,11 +66,11 @@ public class InfomeEstudios implements Serializable {
     }
 
     public Paciente getInforme() {
-        return informe;
+        return paciente;
     }
 
     public void setInforme(Paciente informe) {
-        this.informe = informe;
+        this.paciente = informe;
     }
 
    

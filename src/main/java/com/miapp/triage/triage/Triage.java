@@ -1,17 +1,15 @@
 package com.miapp.triage.triage;
-import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Triage implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class Triage {
+
+   
     private int id_triage;
     private int PuntuacionRespiracion;
     private int PuntuacionPulso;
@@ -33,11 +31,16 @@ public class Triage implements Serializable {
     private int HoraDelCambio;
     @OneToOne
     private Paciente paciente;
+    @OneToOne
     private Consulta consulta;
-    private List<PersonalEnfermeria> Enfermeria;
-    private List<Medicos> Medico;
+    @ManyToOne
+    @JoinColumn(name="id_enfermero")
+    private PersonalEnfermeria enfermero;
+    @ManyToOne
+    @JoinColumn(name="id_medico")
+    private Medicos Medico;
 
-    public Triage(int id_triag, int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, List<PersonalEnfermeria> enfermeria, List<Medicos> medico) {
+    public Triage(int id_triag, int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, PersonalEnfermeria enfermero, List<Medicos> medico) {
         id_triage = id_triag;
         PuntuacionRespiracion = puntuacionRespiracion;
         PuntuacionPulso = puntuacionPulso;
@@ -59,8 +62,8 @@ public class Triage implements Serializable {
         HoraDelCambio = horaDelCambio;
         paciente = pacient;
         consulta = consult;
-        Enfermeria = enfermeria;
-        Medico = medico;
+        this.enfermero = enfermero;
+        Medico = (Medicos) medico;
     }
 
     public Triage(){
@@ -235,18 +238,18 @@ public class Triage implements Serializable {
     public void setConsulta(Consulta consulta) {
         this.consulta = consulta;
     }
-    public List<PersonalEnfermeria> getEnfermeria() {
-        return Enfermeria;
+    public PersonalEnfermeria getEnfermero() {
+        return enfermero;
     }
 
-    public void setEnfermeria(List<PersonalEnfermeria> enfermeria) {
-        Enfermeria = enfermeria;
+    public void setEnfermeria(PersonalEnfermeria enfermero) {
+        this.enfermero= enfermero;
     }
-    public List<Medicos> getMedico() {
+    public Medicos getMedico() {
         return Medico;
     }
 
     public void setMedico(List<Medicos> medico) {
-        Medico = medico;
+        Medico = (Medicos) medico;
     }
 }

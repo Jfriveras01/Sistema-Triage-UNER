@@ -2,35 +2,33 @@ package com.miapp.triage.triage;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToOne;
 
-@Entity
+
+
 public class Consulta implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
     private int id_consulta;
-    @Temporal(TemporalType.DATE)
+
     private Date Fecha;
     private int Hora;
     private String Diagnostico;
     private String Lugar;
     private String DiagClinico;
     private BoxAtencion boxAtencion;
+
     @ManyToOne
-    @PrimaryKeyJoinColumn(name="id_consulta")
+    @JoinColumn(name="id_consulta")
     private Paciente consul;
 
+    @ManyToOne
+    @JoinColumn(name="id_medico")
     private Medicos medico;
 
+    @OneToOne
     private Triage triage;
 
     public Consulta(int id_consul,Date fecha, int hora, String diagnostico, String lugar, String diagClinico, BoxAtencion boxatencion, Paciente consu, Triage triag, Medicos medic) {

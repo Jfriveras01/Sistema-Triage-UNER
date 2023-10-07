@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="com.miapp_Triage_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.miapp.triage.triage.Usuarios</class>
-    <class>com.miapp.triage.triage.Consulta</class>
+    <class>com.miapp.triage.triage.AdministradorSistema</class>
     <class>com.miapp.triage.triage.Funcionario</class>
-    <class>com.miapp.triage.triage.InfomeEstudios</class>
+    <class>com.miapp.triage.triage.FuncionarioAdministrativo</class>
+    <class>com.miapp.triage.triage.Medicos</class>
     <class>com.miapp.triage.triage.Paciente</class>
     <class>com.miapp.triage.triage.Persona</class>
-    <class>com.miapp.triage.triage.Triage</class>
-    <class>com.miapp.triage.triage.BoxAtencion</class>
+    <class>com.miapp.triage.triage.PersonalEnfermeria</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/taller?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

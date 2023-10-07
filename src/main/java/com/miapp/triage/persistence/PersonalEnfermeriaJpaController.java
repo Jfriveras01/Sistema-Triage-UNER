@@ -5,7 +5,7 @@
 package com.miapp.triage.persistence;
 
 import com.miapp.triage.persistence.exceptions.NonexistentEntityException;
-import com.miapp.triage.triage.Persona;
+import com.miapp.triage.triage.PersonalEnfermeria;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,27 +20,27 @@ import javax.persistence.criteria.Root;
  *
  * @author iCentro
  */
-public class PersonaJpaController implements Serializable {
+public class PersonalEnfermeriaJpaController implements Serializable {
 
-    public PersonaJpaController(EntityManagerFactory emf) {
+    public PersonalEnfermeriaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
-     public PersonaJpaController(){
+    
+     public PersonalEnfermeriaJpaController(){
         emf= Persistence.createEntityManagerFactory("com.miapp_Triage_jar_1.0-SNAPSHOTPU");
     }
-    
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Persona persona) {
+    public void create(PersonalEnfermeria personalEnfermeria) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(persona);
+            em.persist(personalEnfermeria);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -49,19 +49,19 @@ public class PersonaJpaController implements Serializable {
         }
     }
 
-    public void edit(Persona persona) throws NonexistentEntityException, Exception {
+    public void edit(PersonalEnfermeria personalEnfermeria) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            persona = em.merge(persona);
+            personalEnfermeria = em.merge(personalEnfermeria);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = persona.getId();
-                if (findPersona(id) == null) {
-                    throw new NonexistentEntityException("The persona with id " + id + " no longer exists.");
+                int id = personalEnfermeria.getId();
+                if (findPersonalEnfermeria(id) == null) {
+                    throw new NonexistentEntityException("The personalEnfermeria with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -77,14 +77,14 @@ public class PersonaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Persona persona;
+            PersonalEnfermeria personalEnfermeria;
             try {
-                persona = em.getReference(Persona.class, id);
-                persona.getId();
+                personalEnfermeria = em.getReference(PersonalEnfermeria.class, id);
+                personalEnfermeria.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The persona with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The personalEnfermeria with id " + id + " no longer exists.", enfe);
             }
-            em.remove(persona);
+            em.remove(personalEnfermeria);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -93,19 +93,19 @@ public class PersonaJpaController implements Serializable {
         }
     }
 
-    public List<Persona> findPersonaEntities() {
-        return findPersonaEntities(true, -1, -1);
+    public List<PersonalEnfermeria> findPersonalEnfermeriaEntities() {
+        return findPersonalEnfermeriaEntities(true, -1, -1);
     }
 
-    public List<Persona> findPersonaEntities(int maxResults, int firstResult) {
-        return findPersonaEntities(false, maxResults, firstResult);
+    public List<PersonalEnfermeria> findPersonalEnfermeriaEntities(int maxResults, int firstResult) {
+        return findPersonalEnfermeriaEntities(false, maxResults, firstResult);
     }
 
-    private List<Persona> findPersonaEntities(boolean all, int maxResults, int firstResult) {
+    private List<PersonalEnfermeria> findPersonalEnfermeriaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Persona.class));
+            cq.select(cq.from(PersonalEnfermeria.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -117,20 +117,20 @@ public class PersonaJpaController implements Serializable {
         }
     }
 
-    public Persona findPersona(int id) {
+    public PersonalEnfermeria findPersonalEnfermeria(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Persona.class, id);
+            return em.find(PersonalEnfermeria.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getPersonaCount() {
+    public int getPersonalEnfermeriaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Persona> rt = cq.from(Persona.class);
+            Root<PersonalEnfermeria> rt = cq.from(PersonalEnfermeria.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

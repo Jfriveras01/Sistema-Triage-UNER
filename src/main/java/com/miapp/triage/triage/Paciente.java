@@ -1,5 +1,4 @@
 package com.miapp.triage.triage;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -7,12 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+
 @Entity
-public class Paciente extends Persona implements Serializable{
+public class Paciente extends Persona implements Serializable {
 
     private int Numcontacto;
 
-    @OneToMany(mappedBy="informe")
+   @OneToMany(mappedBy="paciente")
     private List<InfomeEstudios> InformeEstudios;
 
     @OneToMany(mappedBy="consul")

@@ -1,17 +1,9 @@
 package com.miapp.triage.triage;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
-@Entity
-public class Usuarios implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+public class Usuarios  {
+
     private int id;
     private String username;
     private String password;

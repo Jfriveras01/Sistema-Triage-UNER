@@ -1,18 +1,30 @@
 package com.miapp.triage.triage;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-public class Medicos extends Funcionario{
+@Entity
+public class Medicos extends Persona implements Serializable{
 
     private int Matricula;
 
+    @OneToMany(mappedBy="medico")
     private List<Especialidad> Especialidad;
 
+    @ManyToMany
     private List<BoxAtencion> BoxAtencion;
 
-    private Triage triage;
-
+    @ManyToOne
+    @JoinColumn(name="id_triage")
+    private List<Triage> triage;
+    
+    @OneToMany(mappedBy= "medico")
     private List<Consulta> Consulta;
 
     public Medicos(int Matricula, List<Especialidad> Especialidad, List<BoxAtencion> BoxAtencion, Triage triage, List<Consulta> Consulta, int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
@@ -20,7 +32,7 @@ public class Medicos extends Funcionario{
         this.Matricula = Matricula;
         this.Especialidad = Especialidad;
         this.BoxAtencion = BoxAtencion;
-        this.triage = triage;
+        this.triage = (List<Triage>) triage;
         this.Consulta = Consulta;
     }
    
@@ -54,11 +66,13 @@ public class Medicos extends Funcionario{
     public void setBoxAtencion(List<com.miapp.triage.triage.BoxAtencion> boxAtencion) {
         BoxAtencion = boxAtencion;
     }
-    public Triage getTriage() {
+    
+    public List<Triage> getTriage() {
         return triage;
     }
 
-    public void setTriage(Triage triage) {
+    
+    public void setTriage(List<Triage> triage) {
         this.triage = triage;
     }
 
