@@ -1,18 +1,15 @@
 package com.miapp.triage.triage;
-import java.io.Serializable;
 import java.util.List;
-import javax.persistence.OneToOne;
 
 
-public class BoxAtencion implements Serializable {
+public class BoxAtencion  {
 
 
-   
+
     private int id_box;
     private boolean Estado;
     private List<Medicos> Medicos;
     private List<Consulta> Consulta;
-    @OneToOne
     private Paciente paciente;
 
     public BoxAtencion(int id, boolean estado, List<Medicos> medicos, List<Consulta> consulta, Paciente pacient) {

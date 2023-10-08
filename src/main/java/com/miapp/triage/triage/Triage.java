@@ -1,15 +1,10 @@
 package com.miapp.triage.triage;
+import java.io.Serializable;
 import java.util.List;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 
+public class Triage implements Serializable {
 
-public class Triage {
-
-   
     private int id_triage;
     private int PuntuacionRespiracion;
     private int PuntuacionPulso;
@@ -29,15 +24,9 @@ public class Triage {
     private String MotivoCambio;
     private int FechaCambio;
     private int HoraDelCambio;
-    @OneToOne
     private Paciente paciente;
-    @OneToOne
     private Consulta consulta;
-    @ManyToOne
-    @JoinColumn(name="id_enfermero")
     private PersonalEnfermeria enfermero;
-    @ManyToOne
-    @JoinColumn(name="id_medico")
     private Medicos Medico;
 
     public Triage(int id_triag, int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, PersonalEnfermeria enfermero, List<Medicos> medico) {

@@ -1,7 +1,6 @@
 package com.miapp.triage.triage;
 
 
-
 public class Usuarios  {
 
     private int id;

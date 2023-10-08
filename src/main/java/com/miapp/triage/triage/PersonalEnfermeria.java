@@ -1,13 +1,9 @@
 package com.miapp.triage.triage;
-
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
 
 
-@Entity
-public class PersonalEnfermeria extends Persona implements Serializable {
+public class PersonalEnfermeria extends Persona {
 
     
     public PersonalEnfermeria(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {

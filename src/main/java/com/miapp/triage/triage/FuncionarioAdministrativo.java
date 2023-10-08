@@ -1,18 +1,14 @@
 package com.miapp.triage.triage;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 
 
-@Entity
-public class FuncionarioAdministrativo extends Persona implements Serializable{
 
-    @ManyToOne
-    @JoinColumn(name="id_funcionario")
+
+public class FuncionarioAdministrativo extends Persona {
+
+
     private Sector sector;
 
     public FuncionarioAdministrativo() {

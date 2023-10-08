@@ -1,17 +1,12 @@
 package com.miapp.triage.triage;
 import java.util.List;
-import javax.persistence.OneToMany;
+
 
 public class Sector {
 
     private String nombre;
     private int Cod;
-
-
-    @OneToMany(mappedBy="sector")
     private List<FuncionarioAdministrativo> Funadmins;
-
-
 
     public Sector(){
 

@@ -1,4 +1,6 @@
 package com.miapp.triage.triage;
+
+
 import java.util.Date;
 
 public class InfoAsigBox {

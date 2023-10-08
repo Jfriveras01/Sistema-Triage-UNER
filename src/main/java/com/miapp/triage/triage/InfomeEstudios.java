@@ -1,25 +1,18 @@
 package com.miapp.triage.triage;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 
-public class InfomeEstudios implements Serializable {
+public class InfomeEstudios {
 
 
     private int id_informe;
     private String TipoEstudio;
-  
     private Date FechaEstudio;
     private String InformeRealizado;
-    
-  
-    @ManyToOne
-    @JoinColumn(name="id_informe")
     private Paciente paciente;
 
+    
     public InfomeEstudios(int id_info, String tipoEstudio, Date fechaEstudio, String informeRealizado, Paciente paciente) {
         id_informe = id_info;
         TipoEstudio = tipoEstudio;

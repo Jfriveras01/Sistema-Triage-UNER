@@ -1,40 +1,29 @@
 package com.miapp.triage.triage;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 
-@Entity
-public class Paciente extends Persona implements Serializable {
+public class Paciente extends Persona {
 
     private int Numcontacto;
-
-   @OneToMany(mappedBy="paciente")
     private List<InfomeEstudios> InformeEstudios;
-
-    @OneToMany(mappedBy="consul")
     private List<Consulta> Consulta;
-
-    @OneToOne
     private Triage triage;
-    
-    @OneToOne
     private BoxAtencion boxAtencion;
     
     public Paciente() {
     }
 
-    public Paciente(int Numcontacto, List<InfomeEstudios> InformeEstudios, List<Consulta> Consulta, Triage triage, BoxAtencion boxAtencion, int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
-        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
+    public Paciente(int Numcontacto, List<InfomeEstudios> InformeEstudios, List<Consulta> Consulta, Triage triage, BoxAtencion boxAtencion, int id, String nombre, String apellido, Date FechaNac, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+        super(id, nombre, apellido, FechaNac, DNI, Telfijo, Telcelular, Estcivil, correo);
         this.Numcontacto = Numcontacto;
         this.InformeEstudios = InformeEstudios;
         this.Consulta = Consulta;
         this.triage = triage;
         this.boxAtencion = boxAtencion;
     }
+
+    
 
     //GETTERS Y SETTERS
     public int getNumcontacto() {
@@ -76,5 +65,10 @@ public class Paciente extends Persona implements Serializable {
 
     public void setBoxAtencion(BoxAtencion boxAtencion) {
         this.boxAtencion = boxAtencion;
+    }
+    
+    @Override
+    public String toString() {
+        return "Paciente{" + "Nombre=" + getNombre() + ", Apellido=" + getApellido() + ", Fecha de nacimiento=" + getFechaNac() + ", DNI=" + getDNI() + ", Telefono fijo=" + getTelfijo() + ", Telefono celular=" + getTelcelular() + ", Estado Civil=" + getEstcivil() + ", Correo electronico=" + getCorreo() + ",id=" + getId() +  '}';
     }
 }

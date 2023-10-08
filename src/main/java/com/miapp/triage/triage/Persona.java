@@ -1,43 +1,34 @@
 package com.miapp.triage.triage;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-@Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public class Persona implements Serializable  {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+public class Persona  {
+
     private int id;
     private String nombre;
     private String apellido;
-    @Temporal(TemporalType.DATE)
     private Date FechaNac;
-    private int DNI;
-    private int Telfijo;
-    private int Telcelular;
+    private long DNI;
+    private long Telfijo;
+    private long Telcelular;
     private String Estcivil;
     private String correo;
 
-    public Persona(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
+    public Persona(int id, String nombre, String apellido, Date FechaNac, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        FechaNac = fechaNac;
+        this.FechaNac = FechaNac;
         this.DNI = DNI;
-        Telfijo = telfijo;
-        Telcelular = telcelular;
-        Estcivil = estcivil;
+        this.Telfijo = Telfijo;
+        this.Telcelular = Telcelular;
+        this.Estcivil = Estcivil;
         this.correo = correo;
     }
+
+    
+    
 
     public Persona(){
 
@@ -52,7 +43,7 @@ public class Persona implements Serializable  {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -73,40 +64,40 @@ public class Persona implements Serializable  {
         return FechaNac;
     }
 
-    public void setFechaNac(Date fechaNac) {
-        FechaNac = fechaNac;
+    public void setFechaNac(Date FechaNac) {
+        this.FechaNac = FechaNac;
     }
 
-    public int getDNI() {
+    public long getDNI() {
         return DNI;
     }
 
-    public void setDNI(int DNI) {
+    public void setDNI(long DNI) {
         this.DNI = DNI;
     }
 
-    public int getTelfijo() {
+    public long getTelfijo() {
         return Telfijo;
     }
 
-    public void setTelfijo(int telfijo) {
-        Telfijo = telfijo;
+    public void setTelfijo(long Telfijo) {
+        this.Telfijo = Telfijo;
     }
 
-    public int getTelcelular() {
+    public long getTelcelular() {
         return Telcelular;
     }
 
-    public void setTelcelular(int telcelular) {
-        Telcelular = telcelular;
+    public void setTelcelular(long Telcelular) {
+        this.Telcelular = Telcelular;
     }
 
     public String getEstcivil() {
         return Estcivil;
     }
 
-    public void setEstcivil(String estcivil) {
-        Estcivil = estcivil;
+    public void setEstcivil(String Estcivil) {
+        this.Estcivil = Estcivil;
     }
 
     public String getCorreo() {
@@ -117,5 +108,12 @@ public class Persona implements Serializable  {
         this.correo = correo;
     }
 
+    @Override
+    public String toString() {
+        return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", FechaNac=" + FechaNac + ", DNI=" + DNI + ", Telfijo=" + Telfijo + ", Telcelular=" + Telcelular + ", Estcivil=" + Estcivil + ", correo=" + correo + '}';
+    }
+
+    
+    
 
 }

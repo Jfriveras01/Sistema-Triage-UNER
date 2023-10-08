@@ -1,11 +1,8 @@
 package com.miapp.triage.triage;
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
 
 
-@Entity
-public class Funcionario extends Persona implements Serializable{
+public class Funcionario extends Persona {
 
     public Funcionario() {
     }

@@ -1,30 +1,24 @@
 package com.miapp.triage.triage;
 
-import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-@Entity
-public class Medicos extends Persona implements Serializable{
+
+public class Medicos extends Persona{
 
     private int Matricula;
 
-    @OneToMany(mappedBy="medico")
+
     private List<Especialidad> Especialidad;
 
-    @ManyToMany
+
     private List<BoxAtencion> BoxAtencion;
 
-    @ManyToOne
-    @JoinColumn(name="id_triage")
+
     private List<Triage> triage;
     
-    @OneToMany(mappedBy= "medico")
+
     private List<Consulta> Consulta;
 
     public Medicos(int Matricula, List<Especialidad> Especialidad, List<BoxAtencion> BoxAtencion, Triage triage, List<Consulta> Consulta, int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {

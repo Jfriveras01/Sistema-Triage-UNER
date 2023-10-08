@@ -1,18 +1,12 @@
 package com.miapp.triage.triage;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 
+public class Consulta  {
 
-public class Consulta implements Serializable {
 
-   
     private int id_consulta;
-
     private Date Fecha;
     private int Hora;
     private String Diagnostico;
@@ -20,15 +14,14 @@ public class Consulta implements Serializable {
     private String DiagClinico;
     private BoxAtencion boxAtencion;
 
-    @ManyToOne
-    @JoinColumn(name="id_consulta")
+
+
     private Paciente consul;
 
-    @ManyToOne
-    @JoinColumn(name="id_medico")
+
     private Medicos medico;
 
-    @OneToOne
+    
     private Triage triage;
 
     public Consulta(int id_consul,Date fecha, int hora, String diagnostico, String lugar, String diagClinico, BoxAtencion boxatencion, Paciente consu, Triage triag, Medicos medic) {

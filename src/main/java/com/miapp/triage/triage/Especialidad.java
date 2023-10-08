@@ -1,16 +1,11 @@
 package com.miapp.triage.triage;
-import java.util.List;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+
 public class Especialidad {
 
     private String nombre;
     private int Cod;
-
-    @ManyToOne
-    @JoinColumn(name="cod")
     private Medicos medico;
-
     public Especialidad(String nombre, int cod, Medicos medico) {
         this.nombre = nombre;
         this.Cod = cod;
