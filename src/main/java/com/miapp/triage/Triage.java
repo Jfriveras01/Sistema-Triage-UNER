@@ -19,7 +19,7 @@ public class Triage {
         log.setVisible(true);
         log.setLocationRelativeTo(null);
         
-        String archivo = "com/miapp/triage/csv/pacientes.csv";
+        String archivo = "C:\\Users\\iCentro\\Desktop\\taller netbe\\Sistema-Triage-UNER\\src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
                 
         lpacientes listapaci = new lpacientes();
                 
@@ -31,13 +31,12 @@ public class Triage {
         
         Persona fran = new Persona (2,"Nico","Ornetti",fechaNacimiento,44074299,0,345403689,"casado","nicoorneti@gmail.com");
         Persona nico = new Persona (3,"asd","Oasdasdnetti",fechaNacimiento,46074299,0,323403689,"soltero","pollo@gmail.com");
-
+        Persona carlitos = new Persona (2,"carlitos","Ornetti",fechaNacimiento,44074299,0,345403689,"casado","nicoorneti@gmail.com");
+    
         listapaci.agregar(fran);
         listapaci.agregar(nico);
-        
+        listapaci.agregar(carlitos);
+        listapaci.escribirArchivo(archivo, ";");
         listapaci.leerArchivo(archivo, ";");
-        
     }
-    
-
 }
