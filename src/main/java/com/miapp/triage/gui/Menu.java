@@ -57,6 +57,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jButton7.setText("Lista de espera");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Historia clinica");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +160,14 @@ public class Menu extends javax.swing.JFrame {
         histo.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        ListaEspera list = new ListaEspera();
+        list.setVisible(true);
+        list.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
 public class Pacientenuevo extends javax.swing.JFrame {
 
     public lpacientes gestorPacientes;
-    String archivo= "C:\\Users\\iCentro\\Desktop\\taller netbe\\Sistema-Triage-UNER\\src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
+    String archivo= "src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
     
  
   
@@ -64,6 +64,7 @@ public class Pacientenuevo extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -111,7 +112,7 @@ public class Pacientenuevo extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("Siguiente");
+        jToggleButton1.setText("Agregar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -126,6 +127,13 @@ public class Pacientenuevo extends javax.swing.JFrame {
         });
 
         jLabel11.setText("Agregar Paciente");
+
+        jButton1.setText("Triage");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,16 +164,20 @@ public class Pacientenuevo extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel10)
-                            .addComponent(jToggleButton2))
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField3)
-                                .addComponent(jTextField4)
-                                .addComponent(jComboBox1, 0, 139, Short.MAX_VALUE)
-                                .addComponent(jFormattedTextField6))
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jComboBox1, 0, 139, Short.MAX_VALUE)
+                            .addComponent(jFormattedTextField6)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jToggleButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jToggleButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(73, 73, 73))
             .addGroup(layout.createSequentialGroup()
                 .addGap(149, 149, 149)
@@ -216,7 +228,8 @@ public class Pacientenuevo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
+                    .addComponent(jToggleButton2)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -240,34 +253,41 @@ public class Pacientenuevo extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        
+        // Validación de campos obligatorios
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jFormattedTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Los campos Nombres, Apellidos y Fecha de Nacimiento son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Sale de la función si falta algún campo obligatorio
+        }
+        Date fechaNac = null; // Debes manejar la fecha de nacimiento apropiadamente
+        
+        // Comprobar si la persona ya existe en la lista antes de agregarla
+         String dniText = jFormattedTextField3.getText().replace(".", ""); // Elimina los puntos de la cadena de DNI
+
+        for (Persona persona : gestorPacientes.getPacientes()) {
+            if (persona.getDNI() == Long.parseLong(dniText)) {
+                JOptionPane.showMessageDialog(this, "La persona ya existe en la lista.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Sale de la función si la persona ya existe
+            }
+        }
+        
         Persona nuevaPersona = new Persona();
         nuevaPersona.setNombre(jTextField1.getText());
         nuevaPersona.setApellido(jTextField2.getText());
         try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaNac = dateFormat.parse(jFormattedTextField2.getText());
-        nuevaPersona.setFechaNac(fechaNac);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            fechaNac = dateFormat.parse(jFormattedTextField2.getText()); // Asigna el valor parseado a la variable fechaNac
+            nuevaPersona.setFechaNac(fechaNac);
         } catch (ParseException e) {
-        // Manejar cualquier error de conversión de fecha aquí
-        e.printStackTrace();
-        }
-        
-        
-        String dniText = jFormattedTextField3.getText().replaceAll("\\.", "");
-        
-        try {
-        long dni = Long.parseLong(dniText);
-        nuevaPersona.setDNI(dni);
-        } catch (NumberFormatException e) {
-            // Manejar el error si la conversión falla
-        e.printStackTrace();
+            // Manejar cualquier error de conversión de fecha aquí
+            e.printStackTrace();
         }
         nuevaPersona.setTelfijo(Long.parseLong(jFormattedTextField5.getText()));
         nuevaPersona.setTelcelular(Long.parseLong(jFormattedTextField6.getText()));
         nuevaPersona.setEstcivil(jComboBox1.getSelectedItem().toString());
         nuevaPersona.setCorreo(jTextField4.getText());
         gestorPacientes.agregar(nuevaPersona);
-        gestorPacientes.escribirArchivo(archivo, "");
+        gestorPacientes.escribirArchivo(archivo, ";", false);
         jTextField1.setText("");
         jTextField2.setText("");
         jFormattedTextField2.setText("");
@@ -278,13 +298,26 @@ public class Pacientenuevo extends javax.swing.JFrame {
             jComboBox1.setSelectedIndex(0);
             jTextField3.setText("");
             jTextField4.setText("");
+            
+            Triage triag = new Triage();
+            triag.setVisible(true);
+            triag.setLocationRelativeTo(null);
+            this.setVisible(false);
         }
+
+    {
+      
+    }    
    
     {
         
         
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     
@@ -324,6 +357,7 @@ public class Pacientenuevo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;

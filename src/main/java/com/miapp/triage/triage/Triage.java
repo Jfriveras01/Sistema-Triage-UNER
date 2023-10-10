@@ -241,4 +241,6 @@ public class Triage implements Serializable {
     public void setMedico(List<Medicos> medico) {
         Medico = (Medicos) medico;
     }
+    
+    
 }

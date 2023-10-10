@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
@@ -17,10 +18,16 @@ import java.util.ArrayList;
  */
 public class lpacientes {
     
+    private int ultimoId = 0;
+    
     ArrayList<Persona> pacientes;
     
     public lpacientes(ArrayList<Persona> pacientes){
         this.pacientes = pacientes;
+    }
+    
+    public ArrayList<Persona> getPacientes() {
+        return pacientes;
     }
     
     public lpacientes(){
@@ -28,6 +35,9 @@ public class lpacientes {
     }
     
     public void agregar (Persona paci){
+        
+        ultimoId++;
+        paci.setId(ultimoId);
         pacientes.add(paci);
     }
     
@@ -91,40 +101,35 @@ public class lpacientes {
         }
     }
     
-    public void escribirArchivo (String archivo, String separador) {        
-        FileWriter nuevo = null;
-        PrintWriter pw = null;
-        try
-        {
-            nuevo = new FileWriter(archivo);
-            pw = new PrintWriter(nuevo);
-            String linea;
-            for (Persona paci: pacientes) {
-                linea = paci.getId() + separador;
-                linea += paci.getNombre() + separador;
-                linea += paci.getApellido() + separador;
-                linea += paci.getFechaNac() + separador;
-                linea += paci.getDNI() + separador;
-                linea += paci.getTelfijo() + separador;
-                linea += paci.getTelcelular() + separador;
-                linea += paci.getEstcivil() + separador;
-                linea += paci.getCorreo();
-                   
-                pw.println(linea);
-            }
+    public void escribirArchivo(String archivo, String separador, boolean append) {
+    FileWriter nuevo = null;
+    PrintWriter pw = null;
+    try {
+        nuevo = new FileWriter(archivo, append); // Abre el archivo en modo anexar si append es true
+        pw = new PrintWriter(nuevo);
+        for (Persona paci : pacientes) {
+            String linea = paci.getId() + separador;
+            linea += paci.getNombre() + separador;
+            linea += paci.getApellido() + separador;
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            linea += df.format(paci.getFechaNac()) + separador;
+            linea += paci.getDNI() + separador;
+            linea += paci.getTelfijo() + separador;
+            linea += paci.getTelcelular() + separador;
+            linea += paci.getEstcivil() + separador;
+            linea += paci.getCorreo();
+
+            pw.println(linea);
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        } 
-        finally {
-           try {
-           // Nuevamente aprovechamos el finally para 
-           // asegurarnos que se cierra el fichero.
-           if (null != nuevo)
-              nuevo.close();
-           } catch (Exception e2) {
-              e2.printStackTrace();
-           }
-        }   
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (nuevo != null)
+                nuevo.close();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
     }
+}
 }
