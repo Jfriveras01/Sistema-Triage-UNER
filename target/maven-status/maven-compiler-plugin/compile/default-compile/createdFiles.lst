@@ -12,6 +12,7 @@ com\miapp\triage\gui\Triage.class
 com\miapp\triage\gui\Menu.class
 com\miapp\triage\gui\Triage$2.class
 com\miapp\triage\gui\Login$1.class
+com\miapp\triage\gui\Pacientenuevo$6.class
 com\miapp\triage\gui\Medicos$1.class
 com\miapp\triage\gui\Menu$3.class
 com\miapp\triage\triage\FuncionarioAdministrativo.class

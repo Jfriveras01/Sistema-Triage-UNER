@@ -99,16 +99,16 @@ public class lpacientes {
             nuevo = new FileWriter(archivo);
             pw = new PrintWriter(nuevo);
             String linea;
-            for (Persona prov: pacientes) {
-                linea = prov.getId() + separador;
-                linea += prov.getNombre() + separador;
-                linea += prov.getApellido() + separador;
-                linea += prov.getFechaNac() + separador;
-                linea += prov.getDNI() + separador;
-                linea += prov.getTelfijo() + separador;
-                linea += prov.getTelcelular() + separador;
-                linea += prov.getEstcivil() + separador;
-                linea += prov.getCorreo();
+            for (Persona paci: pacientes) {
+                linea = paci.getId() + separador;
+                linea += paci.getNombre() + separador;
+                linea += paci.getApellido() + separador;
+                linea += paci.getFechaNac() + separador;
+                linea += paci.getDNI() + separador;
+                linea += paci.getTelfijo() + separador;
+                linea += paci.getTelcelular() + separador;
+                linea += paci.getEstcivil() + separador;
+                linea += paci.getCorreo();
                    
                 pw.println(linea);
             }
