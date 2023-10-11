@@ -95,10 +95,7 @@ public class lpacientes {
                 br.close();
             }
         }
-        System.out.println("cant " + this.pacientes.size());
-        for (Persona pacie: pacientes) {
-            System.out.println(pacie.toString());
-        }
+        
     }
     
     public void escribirArchivo(String archivo, String separador, boolean append) {

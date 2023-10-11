@@ -12,7 +12,8 @@ public class Medicos extends Persona{
 
     private List<Especialidad> Especialidad;
 
-
+    private List<Estudios> estudios;
+    
     private List<BoxAtencion> BoxAtencion;
 
 
