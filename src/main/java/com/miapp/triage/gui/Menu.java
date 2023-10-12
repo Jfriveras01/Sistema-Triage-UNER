@@ -155,7 +155,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        Medicos med = new Medicos();
+        MedicosGUI med = new MedicosGUI();
         med.setVisible(true);
         med.setLocationRelativeTo(null);
         this.setVisible(false);

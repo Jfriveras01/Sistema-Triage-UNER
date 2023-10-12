@@ -23,28 +23,28 @@ public class lmedicos {
     
     private int ultimoId = 0;
     
-    ArrayList<Persona> medicos;
+    ArrayList<Medicos> medicos;
     
-    public lmedicos(ArrayList<Persona> medicos){
+    public lmedicos(ArrayList<Medicos> medicos){
         this.medicos = medicos;
     }
     
-    public ArrayList<Persona> getMedicos() {
+    public ArrayList<Medicos> getMedicos() {
         return medicos;
     }
     
     public lmedicos(){
-        this.medicos = new ArrayList<Persona>();
+        this.medicos = new ArrayList<Medicos>();
     }
     
-    public void agregar (Persona medi){
+    public void agregar (Medicos medi){
         
         ultimoId++;
         medi.setId(ultimoId);
         medicos.add(medi);
     }
     
-    public boolean eliminar (Persona medi){
+    public boolean eliminar (Medicos medi){
         if(medicos.contains(medi)){
             medicos.remove(medi);
             return true;
@@ -54,7 +54,7 @@ public class lmedicos {
     
     
     public boolean eliminar (int id){
-        for (Persona medi : medicos){
+        for (Medicos medi : medicos){
             if(medi.getId() == id){
                 medicos.remove(medi);
                 return true;
@@ -65,7 +65,7 @@ public class lmedicos {
     
     public void leerArchivo (String archivo, String separador) throws IOException {
         BufferedReader br = null;
-        Persona medi; 
+        Medicos medi; 
       
         try {         
             br = new BufferedReader(new FileReader(archivo));
@@ -87,6 +87,7 @@ public class lmedicos {
                 medi.setTelcelular(Long.parseLong(campos[6]));
                 medi.setEstcivil(campos[7]);
                 medi.setCorreo(campos[8]);
+                medi.setMatricula(Integer.parseInt(campos[9]));
                 
                 this.agregar(medi);                
                 linea = br.readLine();
@@ -106,7 +107,7 @@ public class lmedicos {
     try {
         nuevo = new FileWriter(archivo, append); // Abre el archivo en modo anexar si append es true
         pw = new PrintWriter(nuevo);
-        for (Persona medi : medicos) {
+        for (Medicos medi : medicos) {
             String linea = medi.getId() + separador;
             linea += medi.getNombre() + separador;
             linea += medi.getApellido() + separador;
@@ -116,7 +117,8 @@ public class lmedicos {
             linea += medi.getTelfijo() + separador;
             linea += medi.getTelcelular() + separador;
             linea += medi.getEstcivil() + separador;
-            linea += medi.getCorreo();
+            linea += medi.getCorreo() + separador;
+            linea += medi.getMatricula();
 
             pw.println(linea);
         }

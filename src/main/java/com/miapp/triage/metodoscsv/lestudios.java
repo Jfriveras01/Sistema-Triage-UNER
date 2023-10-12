@@ -4,9 +4,8 @@
  */
 package com.miapp.triage.metodoscsv;
 
-import com.miapp.triage.triage.Especialidad;
+import com.miapp.triage.triage.Estudios;
 import com.miapp.triage.triage.Medicos;
-import com.miapp.triage.triage.Persona;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,18 +14,16 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author Fran
  */
-public class lespecialidad {
+public class lestudios {
     
-    private int Cod = 0;
     
-    ArrayList<Especialidad> especialidad;
-    
+    ArrayList<Estudios> estudios;
+ 
     private ArrayList<String> nombresMedicos = new ArrayList<>();
     
     public void agregarNombreMedico(String nombreMedico) {
@@ -37,49 +34,35 @@ public class lespecialidad {
         return nombresMedicos;
     }
     
-    public lespecialidad(ArrayList<Especialidad> especialidad){
-        this.especialidad = especialidad;
-        this.nombresMedicos = new ArrayList<>();
+    public lestudios(ArrayList<Estudios> estudios){
+        this.estudios = estudios;
     }
     
-  
-    
-    public ArrayList<Especialidad> getEspecialidad() {
-        return especialidad;
+    public ArrayList<Estudios> getEstudios() {
+        return estudios;
     }
     
-    public lespecialidad(){
-        this.especialidad = new ArrayList<Especialidad>();
+    public lestudios(){
+        this.estudios = new ArrayList<Estudios>();
     }
     
-    public void agregar (Especialidad espe){
-        
-        Cod++;
-        espe.setCod(Cod);
-        especialidad.add(espe);
+    public void agregar(Estudios est) {
+        estudios.add(est);
     }
     
-    public boolean eliminar (Especialidad espe){
-        if(especialidad.contains(espe)){
-            especialidad.remove(espe);
+    public boolean eliminar (Estudios est){
+        if(estudios.contains(est)){
+            estudios.remove(est);
             return true;
         }
         return false;
     }
     
-    public boolean eliminar (int cod){
-        for (Especialidad espe : especialidad){
-            if(espe.getCod() == cod){
-                especialidad.remove(espe);
-                return true;
-            }
-        }
-        return false;
-    }
     
-   public void leerArchivo(String archivo, String separador) throws IOException {
+
+    public void leerArchivo(String archivo, String separador) throws IOException {
     BufferedReader br = null;
-    Especialidad espe;
+    Estudios est;
 
     try {
         br = new BufferedReader(new FileReader(archivo));
@@ -90,11 +73,10 @@ public class lespecialidad {
         while (linea != null) {
             String[] campos = linea.split(separador);
 
-            // Verifica si la línea contiene al menos dos campos
             if (campos.length >= 2) {
-                espe = new Especialidad();
-                espe.setCod(Integer.parseInt(campos[0]));
-                espe.setNombre(campos[1]);
+                est = new Estudios();
+                est.setUniversidad((campos[0]));
+                est.setFechatit(df.parse(campos[1]));
 
                 // Obtener el nombre del médico si existe
                 if (campos.length > 2) {
@@ -103,7 +85,7 @@ public class lespecialidad {
                     nombresMedicos.add(nombreMedico);
                 }
 
-                this.agregar(espe);
+                this.agregar(est);
             } else {
                 // Maneja el caso en el que la línea no contiene al menos dos campos
                 System.err.println("La línea no contiene los campos necesarios: " + linea);
@@ -119,7 +101,6 @@ public class lespecialidad {
         }
     }
 }
-
     
     public void escribirArchivo(String archivo, String separador, boolean append) {
     FileWriter nuevo = null;
@@ -127,18 +108,19 @@ public class lespecialidad {
     try {
         nuevo = new FileWriter(archivo, append); // Abre el archivo en modo anexar si append es true
         pw = new PrintWriter(nuevo);
-        for (Especialidad espe : especialidad) {
-            String linea = espe.getCod() + separador;
-            linea += espe.getNombre() + separador;
+    for (Estudios est : estudios) {
+            String linea = est.getUniversidad() + separador;
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            linea += df.format(est.getFechatit()) + separador;
 
             // Obtener el objeto Medico asociado a la Especialidad
-            Medicos medico = espe.getMedicos();
+            Medicos medico = est.getMedicos();
             if (medico != null) {
                 linea += medico.getNombre() + separador;
                 // Si hay más propiedades del objeto Medico para escribir, agrégalas aquí
             } else {
                 // Si no hay un médico asociado, coloca un valor por defecto o un separador
-                
+                linea += separador;
             }
 
             pw.println(linea);
@@ -155,3 +137,4 @@ public class lespecialidad {
     }
 }
 }
+
