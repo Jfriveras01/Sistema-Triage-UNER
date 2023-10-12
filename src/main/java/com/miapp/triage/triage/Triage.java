@@ -242,5 +242,138 @@ public class Triage implements Serializable {
         Medico = (Medicos) medico;
     }
     
+    public int calcularPuntuacion(String PuntuacionRespiracion, String PuntuacionPulso, String PuntuacionEstMental, String PuntuacionConciencia,
+    String PuntuacionDolResp, String PuntuacionLesGraves, String PuntuacionEdad, String PuntuacionFiebre,
+    String PuntuacionVomitos, String PuntuacionDolAbdominal, String PuntuacionSignosShock,
+    String PuntuacionLesLeves, String PuntuacionSangrado) {
+    int puntuacion = 0;
+
+    // Puntuación para la Respiración
+    if ("Moderada".equals(PuntuacionRespiracion)) {
+        puntuacion += 1;
+    } else if ("Grave".equals(PuntuacionRespiracion)) {
+        puntuacion += 2;
+    } else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para el Pulso
+    if ("Anormal".equals(PuntuacionPulso)) {
+        puntuacion += 1;
+    } else {
+        puntuacion +=0;
+    }
+
+    // Puntuación para el Estado Mental
+    if ("Confusion leve".equals(PuntuacionEstMental)) {
+        puntuacion += 1;
+    } else if ("Confusion Grave".equals(PuntuacionEstMental)) {
+        puntuacion += 2;
+    } else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para la Conciencia
+    if ("Perdida de conciencia".equals(PuntuacionConciencia)) {
+        puntuacion += 3;
+    } else {
+        puntuacion +=0;
+    }
+
+    // Puntuación para el Dolor en el Pecho o Dificultad para Respirar
+    if ("Presente".equals(PuntuacionDolResp)) {
+        puntuacion += 1;
+    }else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para las Lesiones Graves
+    if ("Presentes".equals(PuntuacionLesGraves)) {
+        puntuacion += 2;
+    } else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para la Edad
+    if ("Niño o anciano".equals(PuntuacionEdad)) {
+        puntuacion += 1;
+    }else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para la Fiebre
+    if ("Fiebre moderada".equals(PuntuacionFiebre)) {
+        puntuacion += 1;
+    } else if ("Fiebre alta".equals(PuntuacionFiebre)) {
+        puntuacion += 2;
+    } else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para los Vómitos
+    if ("Vómitos moderados".equals(PuntuacionVomitos)) {
+        puntuacion += 1;
+    } else if ("Vómitos intesos".equals(PuntuacionVomitos)) {
+        puntuacion += 2;
+    }else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para el Dolor Abdominal
+    if ("Dolor moderado".equals(PuntuacionDolAbdominal)) {
+        puntuacion += 1;
+    } else if ("Dolor severo".equals(PuntuacionDolAbdominal)) {
+        puntuacion += 2;
+    }else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para los Signos de Shock
+    if ("presentes".equals(PuntuacionSignosShock)) {
+        puntuacion += 3;
+    } else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para las Lesiones Leves
+    if ("Presentes".equals(PuntuacionLesLeves)) {
+        puntuacion += 1;
+    } else{
+        puntuacion +=0;
+    }
+
+    // Puntuación para el Sangrado
+    if ("Sangrado moderado".equals(PuntuacionSangrado)) {
+        puntuacion += 1;
+    } else if ("Sangrado intenso".equals(PuntuacionSangrado)) {
+        puntuacion += 2;
+    } else{
+        puntuacion +=0;
+    }
+
+    return puntuacion;
+}
+    
+    public int calcularTiempoEspera(int puntuacion){
+        int tiempoespera=0;
+        
+        if (puntuacion>=0 && puntuacion<= 4){
+            tiempoespera= 0;
+        }
+        if (puntuacion>=0 && puntuacion<= 4){
+            tiempoespera= 60;
+        }
+        if (puntuacion>=5 && puntuacion<= 9){
+            tiempoespera= 30;
+        }
+        if (puntuacion>=10 && puntuacion<= 14){
+            tiempoespera= 15;
+        }
+        if (puntuacion>=0 && puntuacion<= 4){
+            tiempoespera= 5;
+        }
+        return tiempoespera;
+    }
+    
     
 }

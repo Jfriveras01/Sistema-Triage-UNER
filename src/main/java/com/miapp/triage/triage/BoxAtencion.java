@@ -62,4 +62,8 @@ public class BoxAtencion  {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
+    
+    public boolean estaOcupado() {
+    return Estado;
+    }
 }

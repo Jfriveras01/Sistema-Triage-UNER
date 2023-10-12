@@ -313,7 +313,7 @@ public class Pacientenuevo extends javax.swing.JFrame {
             jTextField3.setText("");
             jTextField4.setText("");
             
-            Triage triag = new Triage();
+            TriageGUI triag = new TriageGUI();
             triag.setVisible(true);
             triag.setLocationRelativeTo(null);
             this.setVisible(false);
