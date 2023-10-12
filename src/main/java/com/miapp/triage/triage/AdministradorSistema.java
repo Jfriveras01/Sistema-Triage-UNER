@@ -9,9 +9,10 @@ public class AdministradorSistema extends Persona {
 
     }
 
-    public AdministradorSistema(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
-        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
+    public AdministradorSistema(int id, String nombre, String apellido, Date FechaNac, String domicilio, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+        super(id, nombre, apellido, FechaNac, domicilio, DNI, Telfijo, Telcelular, Estcivil, correo);
     }
+
 
    
 }

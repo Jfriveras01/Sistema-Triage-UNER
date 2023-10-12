@@ -5,13 +5,13 @@ import java.util.List;
 
 public class PersonalEnfermeria extends Persona {
 
+    private List<Triage> triage;
     
-    public PersonalEnfermeria(int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
-        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
+    public PersonalEnfermeria(List<Triage> triage, int id, String nombre, String apellido, Date FechaNac, String domicilio, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+        super(id, nombre, apellido, FechaNac, domicilio, DNI, Telfijo, Telcelular, Estcivil, correo);
+        this.triage = triage;
     }
     
-    
-    private List<Triage> triage;
 
     public PersonalEnfermeria(Triage triage) {
         this.triage = (List<Triage>) triage;

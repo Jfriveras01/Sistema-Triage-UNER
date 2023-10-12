@@ -9,17 +9,19 @@ public class Persona  {
     private String nombre;
     private String apellido;
     private Date FechaNac;
+    private String domicilio;
     private long DNI;
     private long Telfijo;
     private long Telcelular;
     private String Estcivil;
     private String correo;
 
-    public Persona(int id, String nombre, String apellido, Date FechaNac, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+    public Persona(int id, String nombre, String apellido, Date FechaNac, String domicilio, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.FechaNac = FechaNac;
+        this.domicilio = domicilio;
         this.DNI = DNI;
         this.Telfijo = Telfijo;
         this.Telcelular = Telcelular;
@@ -68,6 +70,14 @@ public class Persona  {
         this.FechaNac = FechaNac;
     }
 
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+    
     public long getDNI() {
         return DNI;
     }

@@ -288,7 +288,7 @@ public class MedicosGUI extends javax.swing.JFrame {
                 String nombreCompleto = nombre + " " + apellido;
                 
                 if (nombreCompleto.equals(medicoSeleccionado)){
-                    return datos[9];
+                    return datos[10];
                 }
             }
         }

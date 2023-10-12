@@ -82,12 +82,13 @@ public class lmedicos {
                 medi.setNombre(campos[1]);
                 medi.setApellido (campos[2]);
                 medi.setFechaNac (df.parse(campos[3]));
-                medi.setDNI(Long.parseLong(campos[4]));                
-                medi.setTelfijo(Long.parseLong(campos[5]));
-                medi.setTelcelular(Long.parseLong(campos[6]));
-                medi.setEstcivil(campos[7]);
-                medi.setCorreo(campos[8]);
-                medi.setMatricula(Integer.parseInt(campos[9]));
+                medi.setDomicilio(campos[4]);
+                medi.setDNI(Long.parseLong(campos[5]));                
+                medi.setTelfijo(Long.parseLong(campos[6]));
+                medi.setTelcelular(Long.parseLong(campos[7]));
+                medi.setEstcivil(campos[8]);
+                medi.setCorreo(campos[9]);
+                medi.setMatricula(Integer.parseInt(campos[10]));
                 
                 this.agregar(medi);                
                 linea = br.readLine();
@@ -113,6 +114,7 @@ public class lmedicos {
             linea += medi.getApellido() + separador;
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             linea += df.format(medi.getFechaNac()) + separador;
+            linea += medi.getDomicilio() + separador;
             linea += medi.getDNI() + separador;
             linea += medi.getTelfijo() + separador;
             linea += medi.getTelcelular() + separador;

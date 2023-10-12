@@ -79,11 +79,12 @@ public class lpacientes {
                 paci.setNombre(campos[1]);
                 paci.setApellido (campos[2]);
                 paci.setFechaNac (df.parse(campos[3]));
-                paci.setDNI(Long.parseLong(campos[4]));                
-                paci.setTelfijo(Long.parseLong(campos[5]));
-                paci.setTelcelular(Long.parseLong(campos[6]));
-                paci.setEstcivil(campos[7]);
-                paci.setCorreo(campos[8]);
+                paci.setDomicilio(campos[4]);
+                paci.setDNI(Long.parseLong(campos[5]));                
+                paci.setTelfijo(Long.parseLong(campos[6]));
+                paci.setTelcelular(Long.parseLong(campos[7]));
+                paci.setEstcivil(campos[8]);
+                paci.setCorreo(campos[9]);
                
                 this.agregar(paci);                
                 linea = br.readLine();
@@ -110,6 +111,7 @@ public class lpacientes {
             linea += paci.getApellido() + separador;
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             linea += df.format(paci.getFechaNac()) + separador;
+            linea += paci.getDomicilio() + separador;
             linea += paci.getDNI() + separador;
             linea += paci.getTelfijo() + separador;
             linea += paci.getTelcelular() + separador;

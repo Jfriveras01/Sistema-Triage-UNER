@@ -22,15 +22,16 @@ public class Medicos extends Persona{
 
     private List<Consulta> Consulta;
 
-    public Medicos(int Matricula, List<Especialidad> Especialidad, List<BoxAtencion> BoxAtencion, Triage triage, List<Consulta> Consulta, int id, String nombre, String apellido, Date fechaNac, int DNI, int telfijo, int telcelular, String estcivil, String correo) {
-        super(id, nombre, apellido, fechaNac, DNI, telfijo, telcelular, estcivil, correo);
+    public Medicos(int Matricula, List<Especialidad> Especialidad, List<Estudios> estudios, List<BoxAtencion> BoxAtencion, List<Triage> triage, List<Consulta> Consulta, int id, String nombre, String apellido, Date FechaNac, String domicilio, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+        super(id, nombre, apellido, FechaNac, domicilio, DNI, Telfijo, Telcelular, Estcivil, correo);
         this.Matricula = Matricula;
         this.Especialidad = Especialidad;
+        this.estudios = estudios;
         this.BoxAtencion = BoxAtencion;
-        this.triage = (List<Triage>) triage;
+        this.triage = triage;
         this.Consulta = Consulta;
     }
-   
+
 
     public Medicos() {
 

@@ -14,8 +14,8 @@ public class Paciente extends Persona {
     public Paciente() {
     }
 
-    public Paciente(int Numcontacto, List<InfomeEstudios> InformeEstudios, List<Consulta> Consulta, Triage triage, BoxAtencion boxAtencion, int id, String nombre, String apellido, Date FechaNac, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
-        super(id, nombre, apellido, FechaNac, DNI, Telfijo, Telcelular, Estcivil, correo);
+    public Paciente(int Numcontacto, List<InfomeEstudios> InformeEstudios, List<Consulta> Consulta, Triage triage, BoxAtencion boxAtencion, int id, String nombre, String apellido, Date FechaNac, String domicilio, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+        super(id, nombre, apellido, FechaNac, domicilio, DNI, Telfijo, Telcelular, Estcivil, correo);
         this.Numcontacto = Numcontacto;
         this.InformeEstudios = InformeEstudios;
         this.Consulta = Consulta;
@@ -23,7 +23,6 @@ public class Paciente extends Persona {
         this.boxAtencion = boxAtencion;
     }
 
-    
 
     //GETTERS Y SETTERS
     public int getNumcontacto() {
