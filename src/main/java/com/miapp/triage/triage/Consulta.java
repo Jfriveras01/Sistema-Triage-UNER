@@ -8,7 +8,7 @@ public class Consulta  {
 
     private int id_consulta;
     private Date Fecha;
-    private int Hora;
+    private String Hora;
     private String Diagnostico;
     private String Lugar;
     private String DiagClinico;
@@ -24,7 +24,7 @@ public class Consulta  {
     
     private Triage triage;
 
-    public Consulta(int id_consul,Date fecha, int hora, String diagnostico, String lugar, String diagClinico, BoxAtencion boxatencion, Paciente consu, Triage triag, Medicos medic) {
+    public Consulta(int id_consul,Date fecha, String hora, String diagnostico, String lugar, String diagClinico, BoxAtencion boxatencion, Paciente consu, Triage triag, Medicos medic) {
         id_consulta = id_consul;
         Fecha = fecha;
         Hora = hora;
@@ -59,11 +59,11 @@ public class Consulta  {
         Fecha = fecha;
     }
 
-    public int getHora() {
+    public String getHora() {
         return Hora;
     }
 
-    public void setHora(int hora) {
+    public void setHora(String hora) {
         Hora = hora;
     }
 

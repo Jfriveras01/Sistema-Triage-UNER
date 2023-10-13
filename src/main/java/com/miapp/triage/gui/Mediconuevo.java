@@ -107,7 +107,7 @@ public class Mediconuevo extends javax.swing.JFrame {
 
         jLabel4.setText("Documento");
 
-        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jToggleButton1.setText("Siguiente");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {

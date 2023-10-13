@@ -28,33 +28,41 @@ public class Triage implements Serializable {
     private PersonalEnfermeria enfermero;
     private Medicos Medico;
     private int puntuacion;
+    private String tiempoespera;
+    private String tipourgencia;
+
+    public Triage(int id_triage, int PuntuacionRespiracion, int PuntuacionPulso, int PuntuacionEstMental, int PuntuacionConciencia, int PuntuacionDolResp, int PuntuacionLesGraves, int PuntuacionEdad, int PuntuacionFiebre, int PuntuacionVomitos, int PuntuacionDolAbdominal, int PuntuacionSignosShock, int PuntuacionLesLeves, int PuntuacionSangrado, String ColorAsignado, String MotivoCambio, int FechaCambio, int HoraDelCambio, Paciente paciente, Consulta consulta, PersonalEnfermeria enfermero, Medicos Medico, int puntuacion, String tiempoespera, String tipourgencia) {
+        this.id_triage = id_triage;
+        this.PuntuacionRespiracion = PuntuacionRespiracion;
+        this.PuntuacionPulso = PuntuacionPulso;
+        this.PuntuacionEstMental = PuntuacionEstMental;
+        this.PuntuacionConciencia = PuntuacionConciencia;
+        this.PuntuacionDolResp = PuntuacionDolResp;
+        this.PuntuacionLesGraves = PuntuacionLesGraves;
+        this.PuntuacionEdad = PuntuacionEdad;
+        this.PuntuacionFiebre = PuntuacionFiebre;
+        this.PuntuacionVomitos = PuntuacionVomitos;
+        this.PuntuacionDolAbdominal = PuntuacionDolAbdominal;
+        this.PuntuacionSignosShock = PuntuacionSignosShock;
+        this.PuntuacionLesLeves = PuntuacionLesLeves;
+        this.PuntuacionSangrado = PuntuacionSangrado;
+        this.ColorAsignado = ColorAsignado;
+        this.MotivoCambio = MotivoCambio;
+        this.FechaCambio = FechaCambio;
+        this.HoraDelCambio = HoraDelCambio;
+        this.paciente = paciente;
+        this.consulta = consulta;
+        this.enfermero = enfermero;
+        this.Medico = Medico;
+        this.puntuacion = puntuacion;
+        this.tiempoespera = tiempoespera;
+        this.tipourgencia = tipourgencia;
+    }
+
+    
     
 
-    public Triage(int id_triag, int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, PersonalEnfermeria enfermero, List<Medicos> medico, int puntuacion) {
-        id_triage = id_triag;
-        PuntuacionRespiracion = puntuacionRespiracion;
-        PuntuacionPulso = puntuacionPulso;
-        PuntuacionEstMental = puntuacionEstMental;
-        PuntuacionConciencia = puntuacionConciencia;
-        PuntuacionDolResp = puntuacionDolResp;
-        PuntuacionLesGraves = puntuacionLesGraves;
-        PuntuacionEdad = puntuacionEdad;
-        PuntuacionFiebre = puntuacionFiebre;
-        PuntuacionVomitos = puntuacionVomitos;
-        PuntuacionDolAbdominal = puntuacionDolAbdominal;
-        PuntuacionSignosShock = puntuacionSignosShock;
-        PuntuacionLesLeves = puntuacionLesLeves;
-        PuntuacionSangrado = puntuacionSangrado;   
-        ColorAsignado = colorAsignado;
-        MotivoCambio = motivoCambio;
-        FechaCambio = fechaCambio;
-        HoraDelCambio = horaDelCambio;
-        paciente = pacient;
-        consulta = consult;
-        this.enfermero = enfermero;
-        Medico = (Medicos) medico;
-        this.puntuacion=puntuacion;
-    }
+    
     
     public Triage(){
     }
@@ -232,8 +240,8 @@ public class Triage implements Serializable {
         return Medico;
     }
 
-    public void setMedico(List<Medicos> medico) {
-        Medico = (Medicos) medico;
+    public void setMedico(Medicos medico) {
+        Medico = medico;
     }
     
     public void setpuntuacion(int puntuacion){
@@ -243,6 +251,24 @@ public class Triage implements Serializable {
     public int getpuntuacion(){
         return puntuacion;
     }
+
+    public String getTiempoespera() {
+        return tiempoespera;
+    }
+
+    public void setTiempoespera(String tiempoespera) {
+        this.tiempoespera = tiempoespera;
+    }
+
+    public String getTipourgencia() {
+        return tipourgencia;
+    }
+
+    public void setTipourgencia(String tipourgencia) {
+        this.tipourgencia = tipourgencia;
+    }
+    
+    
     
     
     public void calcularPuntuacion(String PuntuacionRespiracion, String PuntuacionPulso, String PuntuacionEstMental, String PuntuacionConciencia,
@@ -359,26 +385,69 @@ public class Triage implements Serializable {
     
  
     
-    public int calcularTiempoEspera(int puntuacion){
-        int tiempoespera=0;
+    public String calcularTiempoEspera(int puntuacion){
+        String tiempoespera= null;
         
-        if (puntuacion>=0 && puntuacion<= 4){
-            tiempoespera= 0;
+        if(puntuacion == 0){
+            tiempoespera = "4 horas";
         }
-        if (puntuacion>=0 && puntuacion<= 4){
-            tiempoespera= 60;
+        if (puntuacion>0 && puntuacion<= 4){
+            tiempoespera= "2 horas";
         }
+
         if (puntuacion>=5 && puntuacion<= 9){
-            tiempoespera= 30;
+            tiempoespera= "60 minutos";
         }
         if (puntuacion>=10 && puntuacion<= 14){
-            tiempoespera= 15;
+            tiempoespera= "10-15 minutos";
         }
-        if (puntuacion>=0 && puntuacion<= 4){
-            tiempoespera= 5;
+        if (puntuacion>15){
+            tiempoespera= "Atencion inmediata";
         }
         return tiempoespera;
     }
     
+    public String calcularColor(int puntuacion){
+        
+        String color = null;
+        if (puntuacion == 0){
+            color = "azul";
+        }
+        if (puntuacion>0 && puntuacion<= 4){
+            color= "Verde";
+        }
+        if (puntuacion>=5 && puntuacion<= 9){
+            color= "Amarillo";
+        }
+        if (puntuacion>=10 && puntuacion<= 14){
+            color= "Naranja";
+        }
+        if (puntuacion>= 15){
+            color= "Rojo";
+        }
+        return color;
+        
+    }
     
+    public String calcularTipoUrgencia(int puntuacion){
+        
+        String urgencia = null;
+        
+        if (puntuacion == 0){
+            urgencia = "No urgente";
+        }
+        if (puntuacion>0 && puntuacion<= 4){
+            urgencia= "Normal";
+        }
+        if (puntuacion>=5 && puntuacion<= 9){
+            urgencia= "Urgente";
+        }
+        if (puntuacion>=10 && puntuacion<= 14){
+            urgencia= "Muy urgente";
+        }
+        if (puntuacion>= 15){
+            urgencia= "Riesgo vital inmediato";
+        }
+        return urgencia;
+    }
 }

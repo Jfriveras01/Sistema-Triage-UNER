@@ -32,7 +32,7 @@ public class Triage {
         listapaci.escribirArchivo(archivo, ";", false);
         
         ltriage listita= new ltriage();
-        String archivo2= "C:\\Users\\iCentro\\Desktop\\taller 2\\Sistema-Triage-UNER\\src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";
+        String archivo2= "src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";
        
         listita.leerArchivo(archivo2, ";");
     

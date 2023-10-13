@@ -21,7 +21,6 @@ public class MedicosGUI extends javax.swing.JFrame {
     /**
      * Creates new form Medicos
      */
-    String archivo="src\\main\\java\\com\\miapp\\triage\\csv\\especialidades.csv";
     String archivo2= "src\\main\\java\\com\\miapp\\triage\\csv\\medicos.csv";
     public MedicosGUI() {
     initComponents();
@@ -39,7 +38,7 @@ public class MedicosGUI extends javax.swing.JFrame {
             }
         });
     } catch (IOException ex) {
-        Logger.getLogger(Pacientenuevo.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(MedicosGUI.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
 

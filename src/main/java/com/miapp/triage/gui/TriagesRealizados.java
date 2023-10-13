@@ -10,7 +10,7 @@ package com.miapp.triage.gui;
  */
 public class TriagesRealizados extends javax.swing.JDialog {
 
-    String archivo2= "C:\\Users\\iCentro\\Desktop\\taller 2\\Sistema-Triage-UNER\\src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";
+    String archivo2= "src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";
     
     
     public TriagesRealizados(java.awt.Frame parent, boolean modal) {

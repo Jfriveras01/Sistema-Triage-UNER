@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class Pacientenuevo extends javax.swing.JFrame {
 
     public lpacientes gestorPacientes;
+    
     String archivo= "src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
     
  
@@ -93,7 +94,7 @@ public class Pacientenuevo extends javax.swing.JFrame {
 
         jLabel4.setText("Documento");
 
-        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jLabel5.setText("Telefono Fijo");
 
@@ -162,17 +163,16 @@ public class Pacientenuevo extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
-                                .addGap(5, 5, 5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addComponent(jTextField5))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                                            .addComponent(jTextField1)
-                                            .addComponent(jFormattedTextField2)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jTextField5))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
@@ -271,10 +271,12 @@ public class Pacientenuevo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Los campos Nombres, Apellidos y Fecha de Nacimiento son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Sale de la función si falta algún campo obligatorio
         }
+        
+        
         Date fechaNac = null; // Debes manejar la fecha de nacimiento apropiadamente
         
         // Comprobar si la persona ya existe en la lista antes de agregarla
-         String dniText = jFormattedTextField3.getText().replace(".", ""); // Elimina los puntos de la cadena de DNI
+        String dniText = jFormattedTextField3.getText().replace(".", ""); // Elimina los puntos de la cadena de DNI
 
         for (Persona persona : gestorPacientes.getPacientes()) {
             if (persona.getDNI() == Long.parseLong(dniText)) {
@@ -286,6 +288,7 @@ public class Pacientenuevo extends javax.swing.JFrame {
         Persona nuevaPersona = new Persona();
         nuevaPersona.setNombre(jTextField1.getText());
         nuevaPersona.setApellido(jTextField2.getText());
+        
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             fechaNac = dateFormat.parse(jFormattedTextField2.getText()); // Asigna el valor parseado a la variable fechaNac
@@ -294,6 +297,8 @@ public class Pacientenuevo extends javax.swing.JFrame {
             // Manejar cualquier error de conversión de fecha aquí
             e.printStackTrace();
         }
+        
+        nuevaPersona.setDNI(Long.parseLong(jFormattedTextField3.getText()));
         nuevaPersona.setDomicilio(jTextField5.getText());
         nuevaPersona.setTelfijo(Long.parseLong(jFormattedTextField5.getText()));
         nuevaPersona.setTelcelular(Long.parseLong(jFormattedTextField6.getText()));
@@ -308,7 +313,6 @@ public class Pacientenuevo extends javax.swing.JFrame {
             jFormattedTextField3.setText("");
             jFormattedTextField5.setText("");
             jFormattedTextField6.setText("");
-            // Limpia otros campos de la interfaz...
             jComboBox1.setSelectedIndex(0);
             jTextField3.setText("");
             jTextField4.setText("");

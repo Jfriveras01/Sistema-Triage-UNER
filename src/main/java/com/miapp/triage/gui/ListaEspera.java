@@ -163,28 +163,33 @@ public class ListaEspera extends javax.swing.JFrame {
     modeloTabla.setRowCount(0); // Limpia la tabla antes de cargar datos nuevos
 
     try {
-        BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv"));
-         String linea;
+        BufferedReader brPacientes = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv"));
+        BufferedReader brTriage = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv"));
+        String lineaPacientes;
+        String lineaTriage;
 
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
+        while ((lineaPacientes = brPacientes.readLine()) != null && (lineaTriage = brTriage.readLine()) != null) {
+            String[] datosPacientes = lineaPacientes.split(";");
+            String[] datosTriage = lineaTriage.split(";");
             
-            if (datos.length >= 4) { // Asegúrate de que haya al menos 4 campos en el archivo CSV
-                String nombre = datos[1]; // Supongamos que el nombre está en el primer campo
-                String apellido = datos[2]; // Supongamos que el apellido está en el segundo campo
-                String estado = datos[2]; // Supongamos que el estado está en el tercer campo
-                String tiempoEspera = datos[3]; // Supongamos que el tiempo de espera está en el cuarto campo
+            if (datosPacientes.length >= 3 && datosTriage.length >= 4) {
+                String nombre = datosPacientes[1]; 
+                String apellido = datosPacientes[2];
+                String urgencia = datosTriage[0]; 
+                String tiempo = datosTriage[2]; 
 
-                // Agrega solo los campos de nombre y apellido al JTable
-                modeloTabla.addRow(new Object[] {nombre, apellido});
+                // Crea una fila que contenga todos los datos y agrégala al JTable
+                modeloTabla.addRow(new Object[] {nombre, apellido, urgencia, tiempo});
             }
         }
         
-        br.close();
+        brPacientes.close();
+        brTriage.close();
     } catch (IOException e) {
         e.printStackTrace();
     }
 }
+    
     
     /**
      * @param args the command line arguments
