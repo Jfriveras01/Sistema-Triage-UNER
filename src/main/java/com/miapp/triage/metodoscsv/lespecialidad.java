@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.miapp.triage.metodoscsv;
 
 import com.miapp.triage.triage.Especialidad;
@@ -43,7 +39,6 @@ public class lespecialidad {
     }
     
   
-    
     public ArrayList<Especialidad> getEspecialidad() {
         return especialidad;
     }
@@ -137,8 +132,7 @@ public class lespecialidad {
                 linea += medico.getNombre() + separador;
                 // Si hay más propiedades del objeto Medico para escribir, agrégalas aquí
             } else {
-                // Si no hay un médico asociado, coloca un valor por defecto o un separador
-                
+                linea +=null;
             }
 
             pw.println(linea);

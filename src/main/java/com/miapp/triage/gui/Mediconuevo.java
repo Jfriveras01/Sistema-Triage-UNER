@@ -31,7 +31,7 @@ public class Mediconuevo extends javax.swing.JFrame {
     public Mediconuevo() {
         initComponents();
         gestorMedicos = new lmedicos();
-         try {
+        try {
             gestorMedicos.leerArchivo(archivo, ";");
         } catch (IOException ex) {
             Logger.getLogger(Pacientenuevo.class.getName()).log(Level.SEVERE, null, ex);

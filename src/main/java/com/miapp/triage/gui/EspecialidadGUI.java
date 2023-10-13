@@ -194,7 +194,7 @@ public class EspecialidadGUI extends javax.swing.JFrame {
         for (String nombreMedico : gestorEspecialidad.getNombresMedicos()) {
             jComboBox1.addItem(nombreMedico);
         }
-    }
+   }
     
     private void cargarMedicosDesdeArchivo(String archivo2) throws IOException {
     BufferedReader br = null;

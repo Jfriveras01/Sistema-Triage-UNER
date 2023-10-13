@@ -19,7 +19,6 @@ public class Triage implements Serializable {
     private int PuntuacionSignosShock;
     private int PuntuacionLesLeves;
     private int PuntuacionSangrado;
-    private String ColorSugerido;
     private String ColorAsignado;
     private String MotivoCambio;
     private int FechaCambio;
@@ -28,8 +27,10 @@ public class Triage implements Serializable {
     private Consulta consulta;
     private PersonalEnfermeria enfermero;
     private Medicos Medico;
+    private int puntuacion;
+    
 
-    public Triage(int id_triag, int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, PersonalEnfermeria enfermero, List<Medicos> medico) {
+    public Triage(int id_triag, int puntuacionRespiracion, int puntuacionPulso, int puntuacionEstMental, int puntuacionConciencia, int puntuacionDolResp, int puntuacionLesGraves, int puntuacionEdad, int puntuacionFiebre, int puntuacionVomitos, int puntuacionDolAbdominal, int puntuacionSignosShock, int puntuacionLesLeves, int puntuacionSangrado, String colorSugerido, String colorAsignado, String motivoCambio, int fechaCambio, int horaDelCambio, Paciente pacient, Consulta consult, PersonalEnfermeria enfermero, List<Medicos> medico, int puntuacion) {
         id_triage = id_triag;
         PuntuacionRespiracion = puntuacionRespiracion;
         PuntuacionPulso = puntuacionPulso;
@@ -43,8 +44,7 @@ public class Triage implements Serializable {
         PuntuacionDolAbdominal = puntuacionDolAbdominal;
         PuntuacionSignosShock = puntuacionSignosShock;
         PuntuacionLesLeves = puntuacionLesLeves;
-        PuntuacionSangrado = puntuacionSangrado;
-        ColorSugerido = colorSugerido;
+        PuntuacionSangrado = puntuacionSangrado;   
         ColorAsignado = colorAsignado;
         MotivoCambio = motivoCambio;
         FechaCambio = fechaCambio;
@@ -53,10 +53,10 @@ public class Triage implements Serializable {
         consulta = consult;
         this.enfermero = enfermero;
         Medico = (Medicos) medico;
+        this.puntuacion=puntuacion;
     }
-
+    
     public Triage(){
-
     }
 
     //GETTERS Y SETTERS
@@ -173,13 +173,6 @@ public class Triage implements Serializable {
         PuntuacionSangrado = puntuacionSangrado;
     }
 
-    public String getColorSugerido() {
-        return ColorSugerido;
-    }
-
-    public void setColorSugerido(String colorSugerido) {
-        ColorSugerido = colorSugerido;
-    }
 
     public String getColorAsignado() {
         return ColorAsignado;
@@ -234,6 +227,7 @@ public class Triage implements Serializable {
     public void setEnfermeria(PersonalEnfermeria enfermero) {
         this.enfermero= enfermero;
     }
+    
     public Medicos getMedico() {
         return Medico;
     }
@@ -242,7 +236,16 @@ public class Triage implements Serializable {
         Medico = (Medicos) medico;
     }
     
-    public int calcularPuntuacion(String PuntuacionRespiracion, String PuntuacionPulso, String PuntuacionEstMental, String PuntuacionConciencia,
+    public void setpuntuacion(int puntuacion){
+        this.puntuacion=puntuacion;
+    }
+    
+    public int getpuntuacion(){
+        return puntuacion;
+    }
+    
+    
+    public void calcularPuntuacion(String PuntuacionRespiracion, String PuntuacionPulso, String PuntuacionEstMental, String PuntuacionConciencia,
     String PuntuacionDolResp, String PuntuacionLesGraves, String PuntuacionEdad, String PuntuacionFiebre,
     String PuntuacionVomitos, String PuntuacionDolAbdominal, String PuntuacionSignosShock,
     String PuntuacionLesLeves, String PuntuacionSangrado) {
@@ -351,8 +354,10 @@ public class Triage implements Serializable {
         puntuacion +=0;
     }
 
-    return puntuacion;
-}
+    this.setpuntuacion(puntuacion);
+    }
+    
+ 
     
     public int calcularTiempoEspera(int puntuacion){
         int tiempoespera=0;

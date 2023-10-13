@@ -121,6 +121,11 @@ public class TriageGUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Agregar ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,7 +276,7 @@ public class TriageGUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String PuntuacionRespiracion = (String) jComboBox1.getSelectedItem();
         String PuntuacionPulso = (String) jComboBox2.getSelectedItem();
         String PuntuacionEstMental = (String) jComboBox3.getSelectedItem();
@@ -288,14 +293,17 @@ public class TriageGUI extends javax.swing.JFrame {
         
         
         Triage triage = new Triage(); 
-        int puntuacion;
-        puntuacion = triage.calcularPuntuacion(
-                PuntuacionRespiracion, PuntuacionPulso, PuntuacionEstMental, PuntuacionConciencia,
-                PuntuacionDolResp, PuntuacionLesGraves, PuntuacionEdad, PuntuacionFiebre,
-                PuntuacionVomitos, PuntuacionDolAbdominal, PuntuacionSignosShock,
-                PuntuacionLesLeves, PuntuacionSangrado);
-        JOptionPane.showMessageDialog(this, "Puntuación: " + puntuacion);
-    }                                        
+        triage.calcularPuntuacion(
+        PuntuacionRespiracion, PuntuacionPulso, PuntuacionEstMental, PuntuacionConciencia,
+        PuntuacionDolResp, PuntuacionLesGraves, PuntuacionEdad, PuntuacionFiebre,
+        PuntuacionVomitos, PuntuacionDolAbdominal, PuntuacionSignosShock,
+        PuntuacionLesLeves, PuntuacionSangrado);
+
+        int puntuacion = triage.getpuntuacion();
+        JOptionPane.showMessageDialog(this, "La puntuacion del triage es:: " + puntuacion);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+                                      
     
     public static void main(String args[]) {
         
