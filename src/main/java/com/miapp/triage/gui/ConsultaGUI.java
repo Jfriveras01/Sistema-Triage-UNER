@@ -115,6 +115,11 @@ public class ConsultaGUI extends javax.swing.JFrame {
         });
 
         jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField1ActionPerformed(evt);
+            }
+        });
 
         jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
@@ -333,6 +338,10 @@ public class ConsultaGUI extends javax.swing.JFrame {
         men.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
     
     private void cargarPacientesDesdeArchivo(String archivo) throws IOException {
     BufferedReader br = null;
