@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +27,6 @@ public class MedicosGUI extends javax.swing.JFrame {
     public MedicosGUI() {
     initComponents();
     try {
-        jTextField1.setEditable(false);
         jTextField2.setEditable(false);
         jTextField3.setEditable(false);
         jTextField4.setEditable(false);
@@ -58,10 +59,10 @@ public class MedicosGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,12 +89,6 @@ public class MedicosGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,7 +101,7 @@ public class MedicosGUI extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -118,13 +113,10 @@ public class MedicosGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(113, 113, 113)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addGap(156, 156, 156)
@@ -139,9 +131,9 @@ public class MedicosGUI extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -172,10 +164,6 @@ public class MedicosGUI extends javax.swing.JFrame {
         men.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -212,29 +200,34 @@ public class MedicosGUI extends javax.swing.JFrame {
     private void cargarInformacionMedicoSeleccionado() {
     // Obtén el nombre del médico seleccionado
     String medicoSeleccionado = jComboBox1.getSelectedItem().toString();
-    
+    jComboBox2.removeAllItems();
     // Llama a un método para cargar información del archivo CSV basada en el nombre del médico
-    String informacionEspecialidad = cargarInformacioneEspecialidad(medicoSeleccionado);
+    List<String> especialidades = cargarInformacioneEspecialidad(medicoSeleccionado);
     String informacionFechatit = cargarInformacionFechatit(medicoSeleccionado);
     String informacionUniversidad = cargarInformacionUniversidad(medicoSeleccionado);
     String informacionMatricula = cargarInformacionMatricula(medicoSeleccionado);
     
     // Muestra la información en el JTextField
-    jTextField1.setText(informacionEspecialidad);
+    for (String especialidad : especialidades) {
+        jComboBox2.addItem(especialidad);
+    }
+    
     jTextField2.setText(informacionFechatit);
     jTextField3.setText(informacionUniversidad);
     jTextField4.setText(informacionMatricula);
 }
     
-    private String cargarInformacioneEspecialidad(String medicoSeleccionado) {
-    try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\especialidades.csv"))) {
+    private List<String> cargarInformacioneEspecialidad(String medicoSeleccionado) {
+        List<String> especialidades = new ArrayList<>();
+        
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\especialidades.csv"))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] datos = linea.split(";");
             String nombre = datos[2]; // Suponiendo que el nombre está en la primera columna
             if (nombre.equals(medicoSeleccionado)) {
                 // Devuelve la información del médico
-                return datos[1]; // Suponiendo que los detalles del médico están en la segunda columna
+                especialidades.add(datos[1]); // Suponiendo que los detalles del médico están en la segunda columna
             }
         }
     } catch (IOException e) {
@@ -242,7 +235,7 @@ public class MedicosGUI extends javax.swing.JFrame {
     }
     
     // Si el médico no se encuentra, devuelve un mensaje o una cadena vacía
-    return "Información no encontrada";
+    return especialidades;
 }
     
     private String cargarInformacionFechatit(String medicoSeleccionado) {
@@ -348,12 +341,12 @@ public class MedicosGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
