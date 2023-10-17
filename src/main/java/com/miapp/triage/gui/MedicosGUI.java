@@ -198,16 +198,16 @@ public class MedicosGUI extends javax.swing.JFrame {
 }
     
     private void cargarInformacionMedicoSeleccionado() {
-    // Obtén el nombre del médico seleccionado
+
     String medicoSeleccionado = jComboBox1.getSelectedItem().toString();
     jComboBox2.removeAllItems();
-    // Llama a un método para cargar información del archivo CSV basada en el nombre del médico
+
     List<String> especialidades = cargarInformacioneEspecialidad(medicoSeleccionado);
     String informacionFechatit = cargarInformacionFechatit(medicoSeleccionado);
     String informacionUniversidad = cargarInformacionUniversidad(medicoSeleccionado);
     String informacionMatricula = cargarInformacionMatricula(medicoSeleccionado);
     
-    // Muestra la información en el JTextField
+    
     for (String especialidad : especialidades) {
         jComboBox2.addItem(especialidad);
     }
@@ -224,10 +224,10 @@ public class MedicosGUI extends javax.swing.JFrame {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] datos = linea.split(";");
-            String nombre = datos[2]; // Suponiendo que el nombre está en la primera columna
+            String nombre = datos[2]; 
             if (nombre.equals(medicoSeleccionado)) {
-                // Devuelve la información del médico
-                especialidades.add(datos[1]); // Suponiendo que los detalles del médico están en la segunda columna
+
+                especialidades.add(datos[1]); 
             }
         }
     } catch (IOException e) {

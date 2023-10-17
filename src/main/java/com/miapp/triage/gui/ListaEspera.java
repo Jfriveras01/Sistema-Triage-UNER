@@ -7,7 +7,6 @@ package com.miapp.triage.gui;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -160,7 +159,7 @@ public class ListaEspera extends javax.swing.JFrame {
     
     private void cargarDatosDesdeCSV() {
     DefaultTableModel modeloTabla = (DefaultTableModel) jTable3.getModel();
-    modeloTabla.setRowCount(0); // Limpia la tabla antes de cargar datos nuevos
+    modeloTabla.setRowCount(0); 
 
     try {
         BufferedReader brPacientes = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv"));
