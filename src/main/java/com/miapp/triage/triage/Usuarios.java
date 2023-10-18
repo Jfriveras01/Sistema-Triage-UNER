@@ -3,26 +3,28 @@ package com.miapp.triage.triage;
 
 public class Usuarios  {
 
-    private int id;
+    private String rol;
     private String username;
     private String password;
 
+    
     public Usuarios(){
 
     }
 
-    public Usuarios(String username, String password) {
+    public Usuarios(String username, String password, String rol) {
         this.username = username;
         this.password = password;
+        this.rol= rol;
     }
 
 
-    public int getId() {
-        return id;
+    public String getRol() {
+        return rol;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String getUsername() {

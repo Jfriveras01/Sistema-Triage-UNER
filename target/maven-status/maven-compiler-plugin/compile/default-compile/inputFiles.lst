@@ -1,4 +1,5 @@
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\EspecialidadGUI.java
+C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\metodoscsv\lfuncionarios.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\Login.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\EstudiosGUI.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\BoxAtencion.java
@@ -8,11 +9,14 @@ C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\tr
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\Historialclinica.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\Consulta.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\EstadisticasTWO.java
+C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\Verfuncionarios.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\Mediconuevo.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\AdministradorSistema.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\TriagemenuGUI.java
+C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\GestoresGUI.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\Funcionario.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\EstadisticasGUI.java
+C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\FuncionariosGUI.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\Estudios.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\InfoAsigBox.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\Paciente.java
@@ -24,6 +28,7 @@ C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\tr
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\Triage.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\EstadisticasONE.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\metodoscsv\ltriage.java
+C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\metodoscsv\lusuarios.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\Persona.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\Menu.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\metodoscsv\lmedicos.java
@@ -32,6 +37,7 @@ C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\tr
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\FuncionarioAdministrativo.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\PersonalEnfermeria.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\triage\Sector.java
+C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\Funcionarionuevo.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\ListaEspera.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\Pacientenuevo.java
 C:\Users\iCentro\Desktop\taller 2\Sistema-Triage-UNER\src\main\java\com\miapp\triage\gui\TriageGUI.java
