@@ -323,8 +323,14 @@ public class Pacientenuevo extends javax.swing.JFrame {
     }
 
     private void buscarPacientePorDNI() {
+        
+        if (jFormattedTextField3.getText().isEmpty()) {
+            return;
+        }
+        
         String dniText = jFormattedTextField3.getText(); 
         long dni = Long.parseLong(dniText);
+        
 
 
         Paciente pacienteExistente = null;

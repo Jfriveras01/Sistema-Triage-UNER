@@ -4,6 +4,7 @@
  */
 package com.miapp.triage.gui;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -179,6 +180,7 @@ public class ListaEspera extends javax.swing.JFrame {
 
                 // Crea una fila que contenga todos los datos y agrégala al JTable
                 modeloTabla.addRow(new Object[] {nombre, apellido, urgencia, tiempo});
+                
             }
         }
         
@@ -188,7 +190,7 @@ public class ListaEspera extends javax.swing.JFrame {
         e.printStackTrace();
     }
 }
-    
+
     
     /**
      * @param args the command line arguments

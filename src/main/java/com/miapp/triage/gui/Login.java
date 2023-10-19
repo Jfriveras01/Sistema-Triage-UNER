@@ -84,9 +84,9 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jLabel1)))
-                .addGap(42, 42, Short.MAX_VALUE))
+                .addGap(57, 57, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 27, Short.MAX_VALUE)
+                .addGap(0, 37, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -123,7 +123,7 @@ public class Login extends javax.swing.JFrame {
         }
         
         String user= jTextField1.getText();
-        String myPass=String.valueOf(jPasswordField1.getPassword());
+        String contra = String.valueOf(jPasswordField1.getPassword());
         
          try {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -136,7 +136,7 @@ public class Login extends javax.swing.JFrame {
                     String username = datosUsuario[1];
                     String password = datosUsuario[2];
 
-                    if (username.equals(user) && password.equals(myPass)) {
+                    if (username.equals(user) && password.equals(contra)) {
                         // Abre el menú correspondiente según el rol
                         if (rol.equals("Gestor")) {
                             GestoresGUI gestor = new GestoresGUI();

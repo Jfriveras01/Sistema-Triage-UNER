@@ -105,7 +105,7 @@ public class ListaesperaTriage extends javax.swing.JFrame {
                 String dni = datosPacientes[5];
                 String motivo = datosPacientes[10];
 
-                // Crea una fila que contenga todos los datos y agrégala al JTable
+                
                 modeloTabla.addRow(new Object[] {nombre, apellido, dni, motivo});
             }
         }
