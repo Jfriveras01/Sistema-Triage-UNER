@@ -20,28 +20,28 @@ public class lpacientes {
     
     private int ultimoId = 0;
     
-    ArrayList<Persona> pacientes;
+    ArrayList<Paciente> pacientes;
     
-    public lpacientes(ArrayList<Persona> pacientes){
+    public lpacientes(ArrayList<Paciente> pacientes){
         this.pacientes = pacientes;
     }
     
-    public ArrayList<Persona> getPacientes() {
+    public ArrayList<Paciente> getPacientes() {
         return pacientes;
     }
     
     public lpacientes(){
-        this.pacientes = new ArrayList<Persona>();
+        this.pacientes = new ArrayList<Paciente>();
     }
     
-    public void agregar (Persona paci){
+    public void agregar (Paciente paci){
         
         ultimoId++;
         paci.setId(ultimoId);
         pacientes.add(paci);
     }
     
-    public boolean eliminar (Persona paci){
+    public boolean eliminar (Paciente paci){
         if(pacientes.contains(paci)){
             pacientes.remove(paci);
             return true;
@@ -51,7 +51,7 @@ public class lpacientes {
     
     
     public boolean eliminar (int id){
-        for (Persona paci : pacientes){
+        for (Paciente paci : pacientes){
             if(paci.getId() == id){
                 pacientes.remove(paci);
                 return true;
@@ -62,7 +62,7 @@ public class lpacientes {
     
     public void leerArchivo (String archivo, String separador) throws IOException {
         BufferedReader br = null;
-        Persona paci; 
+        Paciente paci; 
       
         try {         
             br = new BufferedReader(new FileReader(archivo));
@@ -85,6 +85,7 @@ public class lpacientes {
                 paci.setTelcelular(Long.parseLong(campos[7]));
                 paci.setEstcivil(campos[8]);
                 paci.setCorreo(campos[9]);
+                paci.setMotivo(campos[10]);
                
                 this.agregar(paci);                
                 linea = br.readLine();
@@ -105,7 +106,7 @@ public class lpacientes {
     try {
         nuevo = new FileWriter(archivo, append); // Abre el archivo en modo anexar si append es true
         pw = new PrintWriter(nuevo);
-        for (Persona paci : pacientes) {
+        for (Paciente paci : pacientes) {
             String linea = paci.getId() + separador;
             linea += paci.getNombre() + separador;
             linea += paci.getApellido() + separador;
@@ -116,7 +117,8 @@ public class lpacientes {
             linea += paci.getTelfijo() + separador;
             linea += paci.getTelcelular() + separador;
             linea += paci.getEstcivil() + separador;
-            linea += paci.getCorreo();
+            linea += paci.getCorreo() + separador;
+            linea += paci.getMotivo();
 
             pw.println(linea);
         }

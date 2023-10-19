@@ -6,6 +6,7 @@ import java.util.List;
 public class Paciente extends Persona {
 
     private int Numcontacto;
+    private String Motivo;
     private List<InfomeEstudios> InformeEstudios;
     private List<Consulta> Consulta;
     private Triage triage;
@@ -14,14 +15,17 @@ public class Paciente extends Persona {
     public Paciente() {
     }
 
-    public Paciente(int Numcontacto, List<InfomeEstudios> InformeEstudios, List<Consulta> Consulta, Triage triage, BoxAtencion boxAtencion, int id, String nombre, String apellido, Date FechaNac, String domicilio, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
+    public Paciente(int Numcontacto, String Motivo, List<InfomeEstudios> InformeEstudios, List<Consulta> Consulta, Triage triage, BoxAtencion boxAtencion, int id, String nombre, String apellido, Date FechaNac, String domicilio, long DNI, long Telfijo, long Telcelular, String Estcivil, String correo) {
         super(id, nombre, apellido, FechaNac, domicilio, DNI, Telfijo, Telcelular, Estcivil, correo);
         this.Numcontacto = Numcontacto;
+        this.Motivo = Motivo;
         this.InformeEstudios = InformeEstudios;
         this.Consulta = Consulta;
         this.triage = triage;
         this.boxAtencion = boxAtencion;
     }
+
+    
 
 
     //GETTERS Y SETTERS
@@ -65,6 +69,16 @@ public class Paciente extends Persona {
     public void setBoxAtencion(BoxAtencion boxAtencion) {
         this.boxAtencion = boxAtencion;
     }
+
+    public String getMotivo() {
+        return Motivo;
+    }
+
+    public void setMotivo(String Motivo) {
+        this.Motivo = Motivo;
+    }
+    
+    
     
     @Override
     public String toString() {

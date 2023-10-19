@@ -28,7 +28,7 @@ public class Login extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +80,7 @@ public class Login extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                    .addComponent(jTextField2)))))
+                                    .addComponent(jPasswordField1)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jLabel1)))
@@ -104,7 +104,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -117,13 +117,13 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()) {
+        if (jTextField1.getText().isEmpty() || jPasswordField1.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Los campos Usuario y Contraseña son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Sale de la función si falta algún campo obligatorio
         }
         
         String user= jTextField1.getText();
-        String pass= jTextField2.getText();
+        String myPass=String.valueOf(jPasswordField1.getPassword());
         
          try {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -136,17 +136,19 @@ public class Login extends javax.swing.JFrame {
                     String username = datosUsuario[1];
                     String password = datosUsuario[2];
 
-                    if (username.equals(user) && password.equals(pass)) {
+                    if (username.equals(user) && password.equals(myPass)) {
                         // Abre el menú correspondiente según el rol
                         if (rol.equals("Gestor")) {
                             GestoresGUI gestor = new GestoresGUI();
                             gestor.setVisible(true);
                             gestor.setLocationRelativeTo(null);
+                            this.setVisible(false);
                         }
-                        if (rol.equals("Random")) {
+                        if (rol.equals("Administrador")) {
                             Menu menu = new Menu();
                             menu.setVisible(true);
                             menu.setLocationRelativeTo(null);
+                            this.setVisible(false);
                         }  
                         
                         this.setVisible(false); // Cierra la ventana de inicio de sesión
@@ -162,17 +164,8 @@ public class Login extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
+         
 
-       
-        
-        
-        
-        
-        Menu men = new Menu();
-        men.setVisible(true);
-        men.setLocationRelativeTo(null);
-        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
     
     
@@ -231,8 +224,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

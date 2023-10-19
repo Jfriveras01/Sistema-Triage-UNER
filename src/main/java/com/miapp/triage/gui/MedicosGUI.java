@@ -4,15 +4,12 @@
  */
 package com.miapp.triage.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,24 +20,10 @@ public class MedicosGUI extends javax.swing.JFrame {
     /**
      * Creates new form Medicos
      */
-    String archivo2= "src\\main\\java\\com\\miapp\\triage\\csv\\medicos.csv";
+
     public MedicosGUI() {
     initComponents();
-    try {
-        jTextField2.setEditable(false);
-        jTextField3.setEditable(false);
-        jTextField4.setEditable(false);
-        cargarMedicosDesdeArchivo(archivo2);  // Cargar médicos primero
-        
-        jComboBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarInformacionMedicoSeleccionado();
-            }
-        });
-    } catch (IOException ex) {
-        Logger.getLogger(MedicosGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    cargarDatosDesdeCSV();
 }
 
     /**
@@ -52,35 +35,11 @@ public class MedicosGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Medico");
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Especialidad");
-
-        jLabel3.setText("Fecha obtencion titulo");
-
-        jLabel4.setText("Numero matricula");
-
-        jLabel5.setText("Universidades");
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -89,69 +48,44 @@ public class MedicosGUI extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Medico", "Especialidad", "Fecha Titulo", "Universidad", "N Matricula"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(1, 1, 1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(84, 84, 84))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
+                .addGap(154, 154, 154)
                 .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(19, 19, 19))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,142 +98,44 @@ public class MedicosGUI extends javax.swing.JFrame {
         men.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
     
-    private void cargarMedicosDesdeArchivo(String archivo2) throws IOException {
-    BufferedReader br = null;
+    private void cargarDatosDesdeCSV() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+    modeloTabla.setRowCount(0); 
+
     try {
-        br = new BufferedReader(new FileReader(archivo2));
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
+        BufferedReader brMedicos = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\medicos.csv"));
+        BufferedReader brEspecialidad = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\especialidades.csv"));
+        BufferedReader brEstudios = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\estudios.csv"));
+        String lineaMedicos;
+        String lineaEspecialidad;
+        String lineaEstudios;
+
+        while ((lineaMedicos = brMedicos.readLine()) != null && (lineaEspecialidad = brEspecialidad.readLine()) != null && (lineaEstudios = brEstudios.readLine()) != null ) {
+            String[] datosMedicos = lineaMedicos.split(";");
+            String[] datosEspecialidad = lineaEspecialidad.split(";");
+            String[] datosEstudios = lineaEstudios.split(";");
             
-            if (datos.length >= 3) {
-                String nombre = datos[1];
-                String apellido = datos[2];
-                
-                // Concatenar nombre y apellido
+            if (datosMedicos.length >= 10 && datosEspecialidad.length >= 2 && datosEstudios.length >= 2) {
+                String nombre = datosMedicos[1]; 
+                String apellido = datosMedicos[2];
+                String especialidades = datosEspecialidad[1]; 
+                String Universidad = datosEstudios[0];
+                String fechaTit = datosEstudios[1];
+                String numMatri = datosMedicos[10];
+
                 String nombreCompleto = nombre + " " + apellido;
-                
-                // Agregar el nombre completo al ComboBox
-                jComboBox1.addItem(nombreCompleto);
+
+                modeloTabla.addRow(new Object[] {nombreCompleto, especialidades, fechaTit, Universidad, numMatri});
             }
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    } finally {
-        if (br != null) {
-            br.close();
-        }
-    }
-}
-    
-    private void cargarInformacionMedicoSeleccionado() {
-
-    String medicoSeleccionado = jComboBox1.getSelectedItem().toString();
-    jComboBox2.removeAllItems();
-
-    List<String> especialidades = cargarInformacioneEspecialidad(medicoSeleccionado);
-    String informacionFechatit = cargarInformacionFechatit(medicoSeleccionado);
-    String informacionUniversidad = cargarInformacionUniversidad(medicoSeleccionado);
-    String informacionMatricula = cargarInformacionMatricula(medicoSeleccionado);
-    
-    
-    for (String especialidad : especialidades) {
-        jComboBox2.addItem(especialidad);
-    }
-    
-    jTextField2.setText(informacionFechatit);
-    jTextField3.setText(informacionUniversidad);
-    jTextField4.setText(informacionMatricula);
-}
-    
-    private List<String> cargarInformacioneEspecialidad(String medicoSeleccionado) {
-        List<String> especialidades = new ArrayList<>();
         
-        try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\especialidades.csv"))) {
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
-            String nombre = datos[2]; 
-            if (nombre.equals(medicoSeleccionado)) {
-
-                especialidades.add(datos[1]); 
-            }
-        }
+        brMedicos.close();
+        brEspecialidad.close();
+        brEstudios.close();
     } catch (IOException e) {
         e.printStackTrace();
     }
-    
-    // Si el médico no se encuentra, devuelve un mensaje o una cadena vacía
-    return especialidades;
-}
-    
-    private String cargarInformacionFechatit(String medicoSeleccionado) {
-    try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\estudios.csv"))) {
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
-            String nombre = datos[2]; // Suponiendo que el nombre está en la primera columna
-            if (nombre.equals(medicoSeleccionado)) {
-                // Devuelve la información del médico
-                return datos[1]; // Suponiendo que los detalles del médico están en la segunda columna
-            }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    
-    // Si el médico no se encuentra, devuelve un mensaje o una cadena vacía
-    return "Información no encontrada";
-}
-    
-    private String cargarInformacionUniversidad(String medicoSeleccionado) {
-    try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\estudios.csv"))) {
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
-            String nombre = datos[2]; // Suponiendo que el nombre está en la primera columna
-            if (nombre.equals(medicoSeleccionado)) {
-                // Devuelve la información del médico
-                return datos[0]; // Suponiendo que los detalles del médico están en la segunda columna
-            }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    
-    // Si el médico no se encuentra, devuelve un mensaje o una cadena vacía
-    return "Información no encontrada";
-}   
-    
-    private String cargarInformacionMatricula(String medicoSeleccionado) {
-    try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\medicos.csv"))) {
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
-            
-            if (datos.length >= 3) {
-                String nombre = datos[1];
-                String apellido = datos[2];
-                
-                // Concatenar nombre y apellido
-                String nombreCompleto = nombre + " " + apellido;
-                
-                if (nombreCompleto.equals(medicoSeleccionado)){
-                    return datos[10];
-                }
-            }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    
-    // Si el médico no se encuentra, devuelve un mensaje o una cadena vacía
-    return "Información no encontrada";
 }
     
     /**
@@ -340,15 +176,7 @@ public class MedicosGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

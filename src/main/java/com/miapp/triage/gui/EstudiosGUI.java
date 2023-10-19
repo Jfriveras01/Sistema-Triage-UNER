@@ -167,16 +167,16 @@ public class EstudiosGUI extends javax.swing.JFrame {
         // Validación de campos obligatorios
     if (jTextField1.getText().isEmpty() || jFormattedTextField1.getText().isEmpty() || jComboBox1.getSelectedItem() == null) {
         JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios ", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Sale de la función si falta algún campo obligatorio
+        return; 
     }
-    Date fechaTit = null; // Debes manejar la fecha de nacimiento apropiadamente
+    Date fechaTit = null; 
 
     Estudios nuevoEstudio = new Estudios();
     nuevoEstudio.setUniversidad(jTextField1.getText());
-    nuevoEstudio.setFechatit(fechaTit); // Aquí falta asignar la fecha de titulación
+    nuevoEstudio.setFechatit(fechaTit);
     Medicos medico = new Medicos();
     medico.setNombre(jComboBox1.getSelectedItem().toString());
-    nuevoEstudio.setMedicos(medico); // Asigna el médico al estudio
+    nuevoEstudio.setMedicos(medico); 
     
     try {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

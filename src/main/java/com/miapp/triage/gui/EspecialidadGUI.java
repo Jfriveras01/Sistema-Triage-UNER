@@ -162,23 +162,20 @@ public class EspecialidadGUI extends javax.swing.JFrame {
     Especialidad nuevaEspe = new Especialidad();
     nuevaEspe.setNombre(nombretxt.getText());
     
-    // Obtener el médico seleccionado del JComboBox
+
     String medicoSeleccionado = (String) jComboBox1.getSelectedItem();
     
-    // Configurar el médico en la nueva especialidad
+
     Medicos medico = new Medicos();
     medico.setNombre(medicoSeleccionado);
     nuevaEspe.setMedicos(medico);
     
-    // Agregar la nueva especialidad al gestorEspecialidad
     gestorEspecialidad.agregar(nuevaEspe);
     
-    // Guardar los datos en el archivo CSV
     gestorEspecialidad.escribirArchivo(archivo, ";", false);
 
-    // Limpia los campos o realiza otras acciones necesarias
     nombretxt.setText("");
-    jComboBox1.setSelectedIndex(-1); // Deselecciona el elemento del JComboBox
+    jComboBox1.setSelectedIndex(-1); 
     
     
     ////////////
@@ -234,9 +231,9 @@ public class EspecialidadGUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Menu men = new Menu();
-        men.setVisible(true);
-        men.setLocationRelativeTo(null);
+        Mediconuevo med = new Mediconuevo();
+        med.setVisible(true);
+        med.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
