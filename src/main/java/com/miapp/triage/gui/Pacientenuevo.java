@@ -23,7 +23,7 @@ public class Pacientenuevo extends javax.swing.JFrame {
 
     public lpacientes gestorPacientes;
     
-    String archivo= "src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
+    String archivo = "src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
     
  
   
@@ -38,7 +38,6 @@ public class Pacientenuevo extends javax.swing.JFrame {
          jFormattedTextField3.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                // Cuando se pierde el foco en el campo de DNI, verifica si el paciente existe
                 buscarPacientePorDNI();
             }
         });
@@ -353,9 +352,6 @@ public class Pacientenuevo extends javax.swing.JFrame {
             jTextField4.setText(pacienteExistente.getCorreo());
             jTextField6.setText(pacienteExistente.getMotivo());
 
-            // También puedes deshabilitar o habilitar componentes según tus necesidades.
-            // Por ejemplo, deshabilitar el campo DNI si el paciente ya existe.
-            jFormattedTextField3.setEnabled(false);
         }
     }
     

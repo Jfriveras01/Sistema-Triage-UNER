@@ -175,8 +175,8 @@ public class ListaEspera extends javax.swing.JFrame {
             if (datosPacientes.length >= 3 && datosTriage.length >= 4) {
                 String nombre = datosPacientes[1]; 
                 String apellido = datosPacientes[2];
-                String urgencia = datosTriage[0]; 
-                String tiempo = datosTriage[2]; 
+                String urgencia = datosTriage[1]; 
+                String tiempo = datosTriage[3]; 
 
                 // Crea una fila que contenga todos los datos y agrégala al JTable
                 modeloTabla.addRow(new Object[] {nombre, apellido, urgencia, tiempo});

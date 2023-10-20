@@ -1,5 +1,4 @@
 package com.miapp.triage.metodoscsv;
-import com.miapp.triage.triage.Especialidad;
 import com.miapp.triage.triage.Triage;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +11,7 @@ import java.io.PrintWriter;
 
 public class ltriage {
     
-    
+    private int ultimoId = 0;
   
     ArrayList<Triage> triage;
     ArrayList<String> nombresMedico = new ArrayList<>();
@@ -36,6 +35,8 @@ public class ltriage {
     }
     
     public ltriage(ArrayList<Triage> triage) {
+        
+        
         this.triage = triage;
         this.DniPaciente= DniPaciente;
         this.nombresMedico= nombresMedico;
@@ -46,6 +47,9 @@ public class ltriage {
     }
     
     public void agregar (Triage tria) {
+        
+        ultimoId++;
+        tria.setId_triage(ultimoId);
         triage.add(tria);
     }
     
@@ -80,13 +84,14 @@ public class ltriage {
 
             if (campos.length >= 4) { // Asegúrate de que haya al menos 4 campos
                 Triage triage = new Triage();
-                triage.setTipourgencia(campos[0]);
-                triage.setColorAsignado(campos[1]);
-                triage.setTiempoespera(campos[2]);
-                triage.setpuntuacion(Integer.parseInt(campos[3]));
-                String nombreMedico = campos[4];
+                triage.setId_triage(Integer.parseInt(campos[0]));
+                triage.setTipourgencia(campos[1]);
+                triage.setColorAsignado(campos[2]);
+                triage.setTiempoespera(campos[3]);
+                triage.setpuntuacion(Integer.parseInt(campos[4]));
+                String nombreMedico = campos[5];
                 nombresMedico.add(nombreMedico);
-                Long DniPacientes = Long.parseLong(campos[5]);
+                Long DniPacientes = Long.parseLong(campos[6]);
                 DniPaciente.add(DniPacientes);
 
                 this.agregar(triage);
@@ -115,6 +120,7 @@ public class ltriage {
         pw = new PrintWriter(nuevo);
         for (Triage tria: triage) {
             String linea= "";
+            linea += tria.getId_triage() + separador;
             linea += tria.getTipourgencia() + separador;
             linea += tria.getColorAsignado() + separador;
             linea += tria.getTiempoespera() + separador;

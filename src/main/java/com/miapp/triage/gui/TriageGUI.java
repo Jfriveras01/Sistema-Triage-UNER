@@ -152,6 +152,12 @@ public class TriageGUI extends javax.swing.JFrame {
 
         jLabel16.setText("Dni paciente triage");
 
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
+            }
+        });
+
         jLabel17.setText("Medico triage");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -376,7 +382,11 @@ public class TriageGUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-     private void cargarPacientesDesdeArchivo(String archivo) throws IOException {
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox6ActionPerformed
+
+    private void cargarPacientesDesdeArchivo(String archivo) throws IOException {
     BufferedReader br = null;
     try {
         br = new BufferedReader(new FileReader(archivo));

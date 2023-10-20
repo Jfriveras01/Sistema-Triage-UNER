@@ -130,7 +130,7 @@
           <StringArray count="3">
             <StringItem index="0" value="Medico"/>
             <StringItem index="1" value="Administrador"/>
-            <StringItem index="2" value="funcionario"/>
+            <StringItem index="2" value="Funcionario"/>
           </StringArray>
         </Property>
       </Properties>

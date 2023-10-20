@@ -322,9 +322,9 @@ public class ConsultaGUI extends javax.swing.JFrame {
         while ((linea = br.readLine()) != null) {
             String[] datos = linea.split(";");
             if (datos.length > 5) {
-                String dni = datos[5];
+                String dni = datos[6];
                 if (dni.equals(pacienteSeleccionado)) {
-                    return datos[3]; 
+                    return datos[4]; 
                 }
             }
         }
