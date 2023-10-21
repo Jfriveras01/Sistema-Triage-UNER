@@ -262,8 +262,8 @@ public class Moverpaciente extends javax.swing.JFrame {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] datos = linea.split(";");
-            String urgencia = datos[6];
-            if (urgencia.equals(paciente)) {
+            String dni = datos[6];
+            if (dni.equals(paciente)) {
 
                 return datos[5]; 
             }
