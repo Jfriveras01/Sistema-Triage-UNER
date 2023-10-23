@@ -176,9 +176,11 @@ public class EstadisticasTWO extends javax.swing.JDialog {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(false); // Esto hará que el formato sea estricto
     
+        Date fechauno = null;
+        Date fechados = null;
         try {
-            Date fechauno = sdf.parse(fecha1);
-            Date fechados = sdf.parse(fecha2);
+            fechauno = sdf.parse(fecha1);
+             fechados = sdf.parse(fecha2);
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "El formato de fecha no es válido");
              return; // Sale del método si las fechas no tienen el formato correcto
@@ -196,15 +198,14 @@ public class EstadisticasTWO extends javax.swing.JDialog {
                 String[] datosPaciente = lineaPaciente.split(";");
                 String[] datosConsulta = lineaConsulta.split(";");
 
-                if (datosPaciente.length >= 4 && datosConsulta.length >= 3) {
-                    
+                if (datosPaciente.length >= 4 && datosConsulta.length >= 3) {  
                     String fechaNacimientoPaciente = datosPaciente[3];
                     Date fechaNacimiento = sdf.parse(fechaNacimientoPaciente);
 
                
                     int edadPaciente = calcularEdad(fechaNacimiento);
-                    String fechaConsulta = datosConsulta[1];
-                    if (fechaDentroDelRango(fechaConsulta, fecha1, fecha2) && edadDentroDelRango(edadPaciente,edad1,edad2)) {
+                    Date fechaConsulta = sdf.parse(datosConsulta[1]);
+                    if (fechaDentroDelRango(fechaConsulta, fechauno, fechados) && edadDentroDelRango(edadPaciente,edad1,edad2)) {
                             pacientesAtendidos++;
                     }
                 }
@@ -215,17 +216,20 @@ public class EstadisticasTWO extends javax.swing.JDialog {
             Logger.getLogger(EstadisticasTWO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        JOptionPane.showMessageDialog(this, "Cantidad de pacientes atendidos en el rango de fechas y edad: " + pacientesAtendidos);
-    
+        if (pacientesAtendidos==0){
+             JOptionPane.showMessageDialog(this, "No hay pacientes atendidos en el rango de fechas y edades dadas ");
+        } else{
+             JOptionPane.showMessageDialog(this, "Cantidad de pacientes atendidos en el rango de fechas y edad: " + pacientesAtendidos);
+        }
+      
+             
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField2ActionPerformed
 
-    private int calcularEdad(Date fechaNacimiento) {
-        // Calcula la edad a partir de la fecha de nacimiento
-        // Esto es solo un ejemplo, puedes implementar un cálculo más preciso si es necesario
+     private int calcularEdad(Date fechaNacimiento) {
         Date fechaActual = new Date();
         int edad = fechaActual.getYear() - fechaNacimiento.getYear();
         if (fechaNacimiento.getMonth() > fechaActual.getMonth() || (fechaNacimiento.getMonth() == fechaActual.getMonth() && fechaNacimiento.getDate() > fechaActual.getDate())) {
@@ -234,17 +238,8 @@ public class EstadisticasTWO extends javax.swing.JDialog {
         return edad;
     }
 
-    private boolean fechaDentroDelRango(String fecha, String fechaInicio, String fechaFin) {
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    try {
-        Date fechaConsulta = sdf.parse(fecha);
-        Date fecha1 = sdf.parse(fechaInicio);
-        Date fecha2 = sdf.parse(fechaFin);
-        return fechaConsulta.compareTo(fecha1) >= 0 && fechaConsulta.compareTo(fecha2) <= 0;
-    } catch (ParseException e) {
-        e.printStackTrace();
-        return false; 
-    }
+    private boolean fechaDentroDelRango(Date fechaConsulta, Date fechauno, Date fechados) {
+        return !fechaConsulta.before(fechauno) && !fechaConsulta.after(fechados);
 }
     
     private boolean edadDentroDelRango(int edad,int edad1, int edad2){

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class EstadisticasONE extends javax.swing.JDialog {
 
     
-    String archivo= "src\\main\\java\\com\\miapp\\triage\\csv\\Consultas.csv";
+    String archivo= "C:\\Users\\iCentro\\Desktop\\taller 2\\Sistema-Triage-UNER\\src\\main\\java\\com\\miapp\\triage\\csv\\Consultas.csv";
     public EstadisticasONE() throws IOException {
         super();
         initComponents();
@@ -168,9 +168,12 @@ public class EstadisticasONE extends javax.swing.JDialog {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     sdf.setLenient(false); // Esto hará que el formato sea estricto
     
+    Date fechauno=null;
+    Date fechados=null;
+    
     try {
-        Date fechauno = sdf.parse(fecha1);
-        Date fechados = sdf.parse(fecha2);
+        fechauno = sdf.parse(fecha1);
+        fechados = sdf.parse(fecha2);
     } catch (ParseException e) {
         JOptionPane.showMessageDialog(this, "El formato de fecha no es válido");
         return; // Sale del método si las fechas no tienen el formato correcto
@@ -183,34 +186,34 @@ public class EstadisticasONE extends javax.swing.JDialog {
                 String[] datos = linea.split(";");
 
                 if (datos.length == 6) {
-                    String fechaConsulta = datos[1]; // La fecha está en la segunda columna (índice 1)
+                    Date fechaConsulta = sdf.parse(datos[1]); 
                     String nombreMedico = datos[5];
 
                     // Compara la fecha y el nombre del médico
-                    if (nombreMedico.equals(medicoSeleccionado) && fechaDentroDelRango(fechaConsulta, fecha1, fecha2)) {
+                    if (nombreMedico.equals(medicoSeleccionado) && fechaDentroDelRango(fechaConsulta, fechauno, fechados)) {
                         consultasEnRango++;
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ParseException ex) {
+            Logger.getLogger(EstadisticasONE.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(this, "El médico " + medicoSeleccionado + " tuvo " + consultasEnRango + " consultas en el rango de fechas especificado.");
+        
+        if(consultasEnRango==0){
+             JOptionPane.showMessageDialog(this, "El medico seleccionado no tuvo consultas en el rango de fechas dadas");
+        }else{
+             JOptionPane.showMessageDialog(this, "El médico " + medicoSeleccionado + " tuvo " + consultasEnRango + " consultas en el rango de fechas especificado.");
+        }
     
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private boolean fechaDentroDelRango(String fecha, String fechaInicio, String fechaFin) {
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    try {
-        Date fechaConsulta = sdf.parse(fecha);
-        Date fecha1 = sdf.parse(fechaInicio);
-        Date fecha2 = sdf.parse(fechaFin);
-        return fechaConsulta.compareTo(fecha1) >= 0 && fechaConsulta.compareTo(fecha2) <= 0;
-    } catch (ParseException e) {
-        e.printStackTrace();
-        return false; 
-    }
+    
+     private boolean fechaDentroDelRango(Date fechaConsulta, Date fechauno, Date fechados) {
+     return !fechaConsulta.before(fechauno) && !fechaConsulta.after(fechados);
 }
+     
+     
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         
     }//GEN-LAST:event_jComboBox1ActionPerformed

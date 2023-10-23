@@ -30,9 +30,9 @@ public class EstadisticasGUI extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,8 +56,6 @@ public class EstadisticasGUI extends javax.swing.JDialog {
 
         jLabel3.setText("Paciente/s que más consultaron en un rango de fechas ");
 
-        jTextField1.setText("                                             Ingresar fechas");
-
         jButton3.setText("Volver");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +64,13 @@ public class EstadisticasGUI extends javax.swing.JDialog {
         });
 
         jButton4.setText("Siguiente");
+
+        jButton5.setText("Ingresar fechas ");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,7 +93,7 @@ public class EstadisticasGUI extends javax.swing.JDialog {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1))))
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,9 +109,9 @@ public class EstadisticasGUI extends javax.swing.JDialog {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
@@ -129,7 +134,10 @@ public class EstadisticasGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       EstadisticasTWO estadisticas= new EstadisticasTWO();
+       estadisticas.setVisible(true);
+       estadisticas.setLocationRelativeTo(null);
+       this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -139,6 +147,13 @@ public class EstadisticasGUI extends javax.swing.JDialog {
         men.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        EstadisticasTHREE estadisticas = new EstadisticasTHREE();
+        estadisticas.setVisible(true);
+        estadisticas.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     
     public static void main(String args[]) {
@@ -185,9 +200,9 @@ public class EstadisticasGUI extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
