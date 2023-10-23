@@ -1,7 +1,6 @@
 package com.miapp.triage.metodoscsv;
 
 import com.miapp.triage.triage.Paciente;
-import com.miapp.triage.triage.Persona;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,7 +9,8 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
+
+
 
 /**
  *
@@ -59,7 +59,7 @@ public class lpacientes {
         }
         return false;
     }
-    
+
     public void leerArchivo (String archivo, String separador) throws IOException {
         BufferedReader br = null;
         Paciente paci; 
@@ -104,7 +104,7 @@ public class lpacientes {
     FileWriter nuevo = null;
     PrintWriter pw = null;
     try {
-        nuevo = new FileWriter(archivo, append); // Abre el archivo en modo anexar si append es true
+        nuevo = new FileWriter(archivo, append); 
         pw = new PrintWriter(nuevo);
         for (Paciente paci : pacientes) {
             String linea = paci.getId() + separador;

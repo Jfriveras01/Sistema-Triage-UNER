@@ -4,7 +4,7 @@
  */
 package com.miapp.triage.gui;
 
-import java.awt.Color;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class ListaEspera extends javax.swing.JFrame {
     /**
      * Creates new form ListaEspera
      */
-    
+
     public ListaEspera() {
         initComponents();
         cargarDatosDesdeCSV();
@@ -75,23 +75,23 @@ public class ListaEspera extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellido", "Estado", "Tiempo espera"
+                "Nombre", "Apellido", "DNI", "Estado", "Tiempo espera"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,11 +175,12 @@ public class ListaEspera extends javax.swing.JFrame {
             if (datosPacientes.length >= 3 && datosTriage.length >= 4) {
                 String nombre = datosPacientes[1]; 
                 String apellido = datosPacientes[2];
+                String DNI = datosPacientes[5];
                 String urgencia = datosTriage[1]; 
                 String tiempo = datosTriage[3]; 
 
                 // Crea una fila que contenga todos los datos y agrégala al JTable
-                modeloTabla.addRow(new Object[] {nombre, apellido, urgencia, tiempo});
+                modeloTabla.addRow(new Object[] {nombre, apellido, DNI, urgencia, tiempo});
                 
             }
         }

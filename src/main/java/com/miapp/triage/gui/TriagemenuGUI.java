@@ -42,7 +42,7 @@ public class TriagemenuGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Paciente Antiguo");
+        jButton2.setText("Realiar Triage");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -59,7 +59,7 @@ public class TriagemenuGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Agendar Consulta");
+        jButton4.setText("Consulta");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);

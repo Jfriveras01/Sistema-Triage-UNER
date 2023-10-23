@@ -6,7 +6,6 @@ package com.miapp.triage.metodoscsv;
 
 import com.miapp.triage.triage.BoxAtencion;
 import com.miapp.triage.triage.Consulta;
-import com.miapp.triage.triage.Especialidad;
 import com.miapp.triage.triage.Medicos;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -110,6 +109,7 @@ public class lconsulta {
                     // Agregar el nombre del médico a la lista de nombres de médicos
                     nombresMedicos.add(nombreMedico);
                 
+                con.setDiagnostico(campos[6]);
 
                 this.agregar(con);
             } else {
@@ -140,6 +140,7 @@ public class lconsulta {
             linea += df.format(con.getFecha()) + separador;
             linea += con.getHora() + separador;
             linea += con.getLugar() + separador;
+            linea += con.getDiagnostico() + separador;
             
             BoxAtencion boxAtencion = con.getBoxAtencion();
             if (boxAtencion != null) {
@@ -157,7 +158,8 @@ public class lconsulta {
                 // Si no hay un médico asociado, coloca un valor por defecto o un separador
                 
             }
-
+            
+            
             pw.println(linea);
         }
     } catch (Exception e) {

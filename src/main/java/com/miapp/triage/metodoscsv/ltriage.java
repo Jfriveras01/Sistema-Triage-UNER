@@ -8,11 +8,11 @@ import com.miapp.triage.triage.Medicos;
 import com.miapp.triage.triage.Paciente;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 public class ltriage {
     
-    private int ultimoId = 0;
-  
+    private static int ultimoId = 0; 
     ArrayList<Triage> triage;
     ArrayList<String> nombresMedico = new ArrayList<>();
     ArrayList<Long> DniPaciente = new ArrayList<>();
@@ -25,7 +25,6 @@ public class ltriage {
         return nombresMedico;
     }
     
-    
     public void agregarDniPaciente(long dniPacientes) {
         DniPaciente.add(dniPacientes);
     }
@@ -35,25 +34,21 @@ public class ltriage {
     }
     
     public ltriage(ArrayList<Triage> triage) {
-        
-        
         this.triage = triage;
-        this.DniPaciente= DniPaciente;
-        this.nombresMedico= nombresMedico;
     }
     
     public ltriage() {
         this.triage = new ArrayList<Triage>();
+        // No es necesario inicializar ultimoId aquí
     }
     
-    public void agregar (Triage tria) {
-        
-        ultimoId++;
+    public void agregar(Triage tria) {
+        ultimoId++; // Incrementa el ID de manera única
         tria.setId_triage(ultimoId);
         triage.add(tria);
     }
     
-    public boolean eliminar (Triage tria) {
+    public boolean eliminar(Triage tria) {
         if (triage.contains(tria)) {
             triage.remove(tria);
             return true;
@@ -61,10 +56,10 @@ public class ltriage {
         return false;
     }
     
-    public boolean eliminar (int id) {
-        for (Triage tria: triage) {
-            if (tria.getId_triage() == id) {
-                triage.remove(tria);                
+    public boolean eliminar (int id){
+        for (Triage tria : triage){
+            if(tria.getId_triage() == id){
+                triage.remove(tria);
                 return true;
             }
         }
@@ -116,11 +111,11 @@ public class ltriage {
         FileWriter nuevo = null;
         PrintWriter pw = null;
     try {
-        nuevo = new FileWriter(archivo, append); // Abre el archivo en modo anexar si append es true
+        nuevo = new FileWriter(archivo, append); 
         pw = new PrintWriter(nuevo);
         for (Triage tria: triage) {
-            String linea= "";
-            linea += tria.getId_triage() + separador;
+
+            String linea = tria.getId_triage() + separador;
             linea += tria.getTipourgencia() + separador;
             linea += tria.getColorAsignado() + separador;
             linea += tria.getTiempoespera() + separador;
@@ -129,14 +124,14 @@ public class ltriage {
             // Obtener el objeto Medico asociado a la Especialidad
             Medicos medico = tria.getMedico();
             if (medico != null) {
-                linea += medico.getNombre() + separador;;
+                linea += medico.getNombre() + separador;
             } else {
                 linea +=null;
             }
             
             Paciente paci = tria.getPaciente();
             if(paci != null){
-                linea += paci.getDNI() + separador;
+                linea += paci.getDNI() ;
             }
 
             pw.println(linea);
