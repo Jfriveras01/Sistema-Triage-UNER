@@ -398,7 +398,8 @@ public class Mediconuevo extends javax.swing.JFrame {
     jTextField7.setText("");
     jTextField8.setText("");
     jFormattedTextField1.setText("");
-        
+    
+        JOptionPane.showMessageDialog(this, "Medico agregado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
 
         {

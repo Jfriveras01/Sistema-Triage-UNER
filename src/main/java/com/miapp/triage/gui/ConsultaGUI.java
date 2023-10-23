@@ -39,6 +39,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
     public ConsultaGUI() {
     initComponents();
     try {
+        gestorConsulta = new lconsulta();
         jTextField1.setEditable(false);
         cargarPacientesDesdeArchivo(archivo);
         cargarMedicoDesdeArchivo(archivo2);

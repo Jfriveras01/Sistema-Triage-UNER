@@ -1,4 +1,5 @@
 package com.miapp.triage.gui;
+import com.miapp.triage.metodoscsv.lpacientes;
 import com.miapp.triage.metodoscsv.ltriage;
 import com.miapp.triage.triage.Medicos;
 import com.miapp.triage.triage.Paciente;
@@ -6,13 +7,13 @@ import com.miapp.triage.triage.Triage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.swing.JOptionPane;
 
 public class TriageGUI extends javax.swing.JFrame {
 
     private ltriage gestorTriage;
+    private lpacientes gestorPaciente;
     String archivo = "src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
     String archivo2 = "src\\main\\java\\com\\miapp\\triage\\csv\\medicos.csv";
     String archivo3 = "src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";
@@ -23,6 +24,7 @@ public class TriageGUI extends javax.swing.JFrame {
             cargarPacientesDesdeArchivo(archivo);
             cargarMedicoDesdeArchivo(archivo2);
             gestorTriage = new ltriage();
+            gestorPaciente = new lpacientes();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -372,16 +374,35 @@ public class TriageGUI extends javax.swing.JFrame {
         triage.setpuntuacion(puntuacion);
         gestorTriage.agregar(triage);
         gestorTriage.escribirArchivo(archivo3,";", true);
-        
+
         
         /////
         
-        ConsultaGUI consul = new ConsultaGUI();
-        consul.setVisible(true);
-        consul.setLocationRelativeTo(null);
-        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private int encontrarIdPorDni(String dniSeleccionado) {
+    int idEncontrado = -1;
+
+    try (BufferedReader brPacientes = new BufferedReader(new FileReader(archivo))) {
+        String lineaPacientes;
+        while ((lineaPacientes = brPacientes.readLine()) != null) {
+            String[] datosPacientes = lineaPacientes.split(";");
+            if (datosPacientes.length >= 7) { 
+                String dni = datosPacientes[5]; 
+                int id = Integer.parseInt(datosPacientes[0]); 
+                if (dniSeleccionado.equals(dni)) {
+                    idEncontrado = id;
+                    break; 
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return idEncontrado;
+}
+    
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox6ActionPerformed
@@ -397,7 +418,6 @@ public class TriageGUI extends javax.swing.JFrame {
             if (datos.length >= 6) {
                 String Dni = datos[5];
                 
-                // Agregar el nombre completo al ComboBox
                 jComboBox5.addItem(Dni);
             }
         }
@@ -424,7 +444,7 @@ public class TriageGUI extends javax.swing.JFrame {
                 
                
                 String nombreCompleto = nombre + " " + apellido; 
-                // Agregar el nombre completo al ComboBox
+
                 jComboBox6.addItem(nombreCompleto);
             }
         }

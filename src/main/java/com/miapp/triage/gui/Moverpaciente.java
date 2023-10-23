@@ -4,13 +4,20 @@
  */
 package com.miapp.triage.gui;
 
+import com.miapp.triage.metodoscsv.ltriage;
+import com.miapp.triage.triage.Triage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -25,8 +32,12 @@ public class Moverpaciente extends javax.swing.JFrame {
      */
     String archivo = "src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";
     
+    private ltriage gestorTriage;
+    ArrayList<Triage> triage;
     public Moverpaciente()  {
         initComponents();
+        this.triage = new ArrayList<Triage>();
+        gestorTriage = new ltriage();
         jTextField1.setEditable(false);
         jTextField2.setEditable(false);
         try {
@@ -86,6 +97,8 @@ public class Moverpaciente extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,10 +116,24 @@ public class Moverpaciente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Mover");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Dar de baja");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -119,19 +146,24 @@ public class Moverpaciente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(96, 96, 96)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1)
-                    .addComponent(jComboBox1, 0, 140, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2))
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addComponent(jLabel4)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2)))
                 .addGap(84, 84, 84))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +184,12 @@ public class Moverpaciente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(37, 37, 37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -171,7 +206,86 @@ public class Moverpaciente extends javax.swing.JFrame {
         men.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    // TODO add your handling code here:
+
+    String pacienteSeleccionado = jComboBox1.getSelectedItem().toString();
     
+    long dniPacienteSeleccionado = Long.parseLong(pacienteSeleccionado);
+
+    String nuevoTipoUrgencia = jComboBox2.getSelectedItem().toString();
+
+    List<String> lineasActualizadas = new ArrayList<>();
+
+
+    try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            String[] datos = linea.split(";");
+            if (datos.length >= 7) { 
+                long dni = Long.parseLong(datos[6]);
+                if (dni == dniPacienteSeleccionado) {
+
+                    datos[1] = nuevoTipoUrgencia;
+                }
+                
+                lineasActualizadas.add(String.join(";", datos));
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+        for (String linea : lineasActualizadas) {
+            writer.write(linea);
+            writer.newLine();
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    JOptionPane.showMessageDialog(this, "Paciente movido con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here
+        String dniSeleccionado = jComboBox1.getSelectedItem().toString();
+        int idTriage = encontrarIdPorDni(dniSeleccionado);
+        gestorTriage.eliminar(idTriage);
+        System.out.println("el id encontrado fue " + idTriage );
+
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+   
+    
+    private int encontrarIdPorDni(String dniSeleccionado) {
+
+        int idEncontrado = -1;
+   
+    try (BufferedReader brPacientes = new BufferedReader(new FileReader(archivo))) {
+        String lineaPacientes;
+        while ((lineaPacientes = brPacientes.readLine()) != null) {
+            System.out.println("Línea leída del archivo: " + lineaPacientes);
+            String[] datosPacientes = lineaPacientes.split(";");
+            if (datosPacientes.length >= 7) {
+                String dni = datosPacientes[6].trim(); // Elimina espacios en blanco
+                int id = Integer.parseInt(datosPacientes[0].trim()); // Elimina espacios en blanco
+                if (dniSeleccionado.equalsIgnoreCase(dni)) { // Comparación sin distinguir mayúsculas/minúsculas
+                    idEncontrado = id;
+                    System.out.println("ID buscado: " + id);
+                    break;
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return idEncontrado;
+} 
     
     private void actualizarComboBox() {
         jComboBox2.removeAllItems();
@@ -182,7 +296,7 @@ public class Moverpaciente extends javax.swing.JFrame {
             jComboBox2.addItem("Muy urgente");
             jComboBox2.addItem("Urgente");
             
-        } else if ("Muy urgente".equals(urgenciaActual)) {
+        } else if ("Muy Urgente".equals(urgenciaActual)) {
             jComboBox2.addItem("Riesgo vital inmediato");
             jComboBox2.addItem("Muy Urgente");
             jComboBox2.addItem("Normal");
@@ -312,6 +426,8 @@ public class Moverpaciente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

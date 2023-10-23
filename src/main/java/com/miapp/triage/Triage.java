@@ -1,12 +1,10 @@
 package com.miapp.triage;
 import com.miapp.triage.gui.Login;
-import com.miapp.triage.triage.Persona;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import com.miapp.triage.metodoscsv.lpacientes;
 import com.miapp.triage.metodoscsv.ltriage;
+
 /**
  *
  * @author Fran
@@ -30,6 +28,8 @@ public class Triage {
         listapaci.leerArchivo(archivo, ";");
         
         listapaci.escribirArchivo(archivo, ";", false);
+        listapaci.eliminar(1);
+        
         
         ltriage listita= new ltriage();
         String archivo2= "src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";

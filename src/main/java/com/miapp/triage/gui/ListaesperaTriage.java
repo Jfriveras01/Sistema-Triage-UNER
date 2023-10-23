@@ -7,6 +7,8 @@ package com.miapp.triage.gui;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,7 +50,16 @@ public class ListaesperaTriage extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Apellido", "DNI", "Motivo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setToolTipText("");
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Volver");
@@ -89,33 +100,46 @@ public class ListaesperaTriage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void cargarDatosDesdeCSV() {
-    DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
-    modeloTabla.setRowCount(0); 
+        DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+        modeloTabla.setRowCount(0);
 
-    try {
-        BufferedReader brPacientes = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv"));
-        String lineaPacientes;
-
-        while ((lineaPacientes = brPacientes.readLine()) != null) {
-            String[] datosPacientes = lineaPacientes.split(";");
-            
-            if (datosPacientes.length >= 10) {
-                String nombre = datosPacientes[1]; 
-                String apellido = datosPacientes[2];
-                String dni = datosPacientes[5];
-                String motivo = datosPacientes[10];
-
-                
-                modeloTabla.addRow(new Object[] {nombre, apellido, dni, motivo});
+        try {
+            Set<String> dniOtraGrilla = new HashSet<>();
+            BufferedReader brOtraGrilla = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv"));
+            String lineaOtraGrilla;
+            while ((lineaOtraGrilla = brOtraGrilla.readLine()) != null) {
+                String[] datosOtraGrilla = lineaOtraGrilla.split(";");
+                if (datosOtraGrilla.length >= 4) {
+                    String dni = datosOtraGrilla[6];
+                    dniOtraGrilla.add(dni);
+                }
             }
-        }
-        
-        brPacientes.close();
+            brOtraGrilla.close();
 
-    } catch (IOException e) {
-        e.printStackTrace();
+
+            BufferedReader brPacientes = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv"));
+            String lineaPacientes;
+
+            while ((lineaPacientes = brPacientes.readLine()) != null) {
+                String[] datosPacientes = lineaPacientes.split(";");
+
+                if (datosPacientes.length >= 10) {
+                    String nombre = datosPacientes[1];
+                    String apellido = datosPacientes[2];
+                    String dni = datosPacientes[5];
+                    String motivo = datosPacientes[10];
+
+                    if (!dniOtraGrilla.contains(dni)) {
+                        modeloTabla.addRow(new Object[]{nombre, apellido, dni, motivo});
+                    }
+                }
+            }
+
+            brPacientes.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
     
     
     /**
