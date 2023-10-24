@@ -312,18 +312,18 @@ public class Moverpaciente extends javax.swing.JFrame {
             jComboBox2.addItem("Muy urgente");
             jComboBox2.addItem("Urgente");
             
-        } else if ("Muy Urgente".equals(urgenciaActual)) {
+        } else if ("Muy urgente".equals(urgenciaActual)) {
             jComboBox2.addItem("Riesgo vital inmediato");
-            jComboBox2.addItem("Muy Urgente");
+            jComboBox2.addItem("Muy urgente");
             jComboBox2.addItem("Normal");
             
         } else if ("Urgente".equals(urgenciaActual)) {
             jComboBox2.addItem("Riesgo vital inmediato");
-            jComboBox2.addItem("Muy Urgente");
+            jComboBox2.addItem("Muy urgente");
             jComboBox2.addItem("Normal");
             jComboBox2.addItem("No urgente");
         } else if ("Normal".equals(urgenciaActual)) {
-            jComboBox2.addItem("Muy Urgente");;
+            jComboBox2.addItem("Muy urgente");;
             jComboBox2.addItem("Urgente");;
             jComboBox2.addItem("No urgente");
         } else if ("No urgente".equals(urgenciaActual)) {

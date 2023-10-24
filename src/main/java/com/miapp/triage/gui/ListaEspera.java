@@ -203,7 +203,6 @@ public class ListaEspera extends javax.swing.JFrame {
     for (int fila = 0; fila < modeloTabla.getRowCount(); fila++) {
         String dni = (String) modeloTabla.getValueAt(fila, 2); 
         listaDNI.add(dni);
-        System.out.println(dni);
     }
 
     return listaDNI;
