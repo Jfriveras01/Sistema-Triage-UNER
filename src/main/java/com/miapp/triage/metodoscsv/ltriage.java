@@ -8,6 +8,8 @@ import com.miapp.triage.triage.Medicos;
 import com.miapp.triage.triage.Paciente;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 public class ltriage {
@@ -43,7 +45,6 @@ public class ltriage {
     
     public ltriage() {
         this.triage = new ArrayList<Triage>();
-        // No es necesario inicializar ultimoId aquí
     }
     
     public void agregar(Triage tria) {
@@ -73,6 +74,7 @@ public class ltriage {
     
    public void leerArchivo(String archivo, String separador) throws IOException {
     BufferedReader br = null;
+    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
     try {
         br = new BufferedReader(new FileReader(archivo));
@@ -92,6 +94,7 @@ public class ltriage {
                 nombresMedico.add(nombreMedico);
                 Long DniPacientes = Long.parseLong(campos[6]);
                 DniPaciente.add(DniPacientes);
+                triage.setFecha(df.parse(campos[7]));
 
                 this.agregar(triage);
             } else {
@@ -125,7 +128,6 @@ public class ltriage {
             linea += tria.getTiempoespera() + separador;
             linea += tria.getpuntuacion() + separador;
             
-            // Obtener el objeto Medico asociado a la Especialidad
             Medicos medico = tria.getMedico();
             if (medico != null) {
                 linea += medico.getNombre() + separador;
@@ -135,8 +137,11 @@ public class ltriage {
             
             Paciente paci = tria.getPaciente();
             if(paci != null){
-                linea += paci.getDNI() ;
+                linea += paci.getDNI() + separador;
             }
+            
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            linea += df.format(tria.getFecha()) ;
 
             pw.println(linea);
         }

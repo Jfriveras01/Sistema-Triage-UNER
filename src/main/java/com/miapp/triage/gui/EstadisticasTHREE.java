@@ -143,15 +143,14 @@ public class EstadisticasTHREE extends javax.swing.JDialog {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(false);
 
-        Date fechauno;
-        Date fechados;
+        Date fechauno=null;
+        Date fechados=null;
 
         try {
             fechauno = sdf.parse(fecha1);
             fechados = sdf.parse(fecha2);
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "El formato de fecha no es válido");
-            return;
         }
 
         Map<Long, Integer> pacienteConsultas = new HashMap<>();

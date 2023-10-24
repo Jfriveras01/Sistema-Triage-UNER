@@ -7,6 +7,9 @@ import com.miapp.triage.triage.Triage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -80,6 +83,8 @@ public class TriageGUI extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jComboBox6 = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jFormattedTextField3 = new javax.swing.JFormattedTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,6 +177,14 @@ public class TriageGUI extends javax.swing.JFrame {
 
         jLabel17.setText("Medico triage");
 
+        jLabel18.setText("Fecha");
+
+        jFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,7 +217,8 @@ public class TriageGUI extends javax.swing.JFrame {
                                         .addComponent(jButton1)
                                         .addComponent(jLabel11))
                                     .addComponent(jLabel16)
-                                    .addComponent(jLabel17))
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,10 +239,13 @@ public class TriageGUI extends javax.swing.JFrame {
                                             .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jComboBox5, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBox6, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(jComboBox6, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(85, 85, 85)
+                                        .addComponent(jFormattedTextField3))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(168, 168, 168)
                         .addComponent(jLabel14)))
@@ -241,10 +258,14 @@ public class TriageGUI extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
+                    .addComponent(jLabel18)
+                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +353,24 @@ public class TriageGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String PuntuacionRespiracion = (String) jComboBox1.getSelectedItem();
+        
+        String fecha = jFormattedTextField3.getText();
+       
+
+        if (fecha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes agregar una fecha.");
+            return;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false);
+
+        Date fechau=null;
+        
+
+        try {
+            fechau = sdf.parse(fecha);
+            String PuntuacionRespiracion = (String) jComboBox1.getSelectedItem();
         String PuntuacionPulso = (String) jComboBox2.getSelectedItem();
         String PuntuacionEstMental = (String) jComboBox3.getSelectedItem();
         String PuntuacionConciencia= (String) jComboBox4.getSelectedItem();
@@ -348,6 +386,7 @@ public class TriageGUI extends javax.swing.JFrame {
         
         
         Triage triage = new Triage(); 
+        triage.setFecha(fechau);
         triage.calcularPuntuacion(
         PuntuacionRespiracion, PuntuacionPulso, PuntuacionEstMental, PuntuacionConciencia,
         PuntuacionDolResp, PuntuacionLesGraves, PuntuacionEdad, PuntuacionFiebre,
@@ -387,6 +426,12 @@ public class TriageGUI extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "La puntuacion del triage es: " + puntuacion);
         volverAtras();
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "El formato de fecha no es válido");
+        }
+        
+        
+        
         /////
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -417,6 +462,10 @@ public class TriageGUI extends javax.swing.JFrame {
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox6ActionPerformed
+
+    private void jFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField3ActionPerformed
+
+    }//GEN-LAST:event_jFormattedTextField3ActionPerformed
                           
     private void volverAtras() {
     TriagemenuGUI pacinuev = new TriagemenuGUI();
@@ -504,6 +553,7 @@ public class TriageGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JComboBox<String> jComboBox9;
+    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -513,6 +563,7 @@ public class TriageGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

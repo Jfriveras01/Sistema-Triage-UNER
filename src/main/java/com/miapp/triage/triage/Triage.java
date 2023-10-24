@@ -1,6 +1,7 @@
 package com.miapp.triage.triage;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
+
 
 
 public class Triage implements Serializable {
@@ -30,8 +31,9 @@ public class Triage implements Serializable {
     private int puntuacion;
     private String tiempoespera;
     private String tipourgencia;
+    Date fecha;
 
-    public Triage(int id_triage, int PuntuacionRespiracion, int PuntuacionPulso, int PuntuacionEstMental, int PuntuacionConciencia, int PuntuacionDolResp, int PuntuacionLesGraves, int PuntuacionEdad, int PuntuacionFiebre, int PuntuacionVomitos, int PuntuacionDolAbdominal, int PuntuacionSignosShock, int PuntuacionLesLeves, int PuntuacionSangrado, String ColorAsignado, String MotivoCambio, int FechaCambio, int HoraDelCambio, Paciente paciente, Consulta consulta, PersonalEnfermeria enfermero, Medicos Medico, int puntuacion, String tiempoespera, String tipourgencia) {
+    public Triage(int id_triage, int PuntuacionRespiracion, int PuntuacionPulso, int PuntuacionEstMental, int PuntuacionConciencia, int PuntuacionDolResp, int PuntuacionLesGraves, int PuntuacionEdad, int PuntuacionFiebre, int PuntuacionVomitos, int PuntuacionDolAbdominal, int PuntuacionSignosShock, int PuntuacionLesLeves, int PuntuacionSangrado, String ColorAsignado, String MotivoCambio, int FechaCambio, int HoraDelCambio, Paciente paciente, Consulta consulta, PersonalEnfermeria enfermero, Medicos Medico, int puntuacion, String tiempoespera, String tipourgencia, Date fecha) {
         this.id_triage = id_triage;
         this.PuntuacionRespiracion = PuntuacionRespiracion;
         this.PuntuacionPulso = PuntuacionPulso;
@@ -57,12 +59,10 @@ public class Triage implements Serializable {
         this.puntuacion = puntuacion;
         this.tiempoespera = tiempoespera;
         this.tipourgencia = tipourgencia;
+        this.fecha= fecha;
     }
 
-    
-    
-
-    
+       
     
     public Triage(){
     }
@@ -76,6 +76,15 @@ public class Triage implements Serializable {
     public void setId_triage(int id_triage) {
         this.id_triage = id_triage;
     }
+    
+    public void setFecha(Date fecha){
+        this.fecha= fecha;
+    }
+    
+    public Date getFecha(){
+        return fecha;
+    }
+    
     
     public int getPuntuacionRespiracion() {
         return PuntuacionRespiracion;
