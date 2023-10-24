@@ -1,5 +1,15 @@
 package com.miapp.triage.triage;
 
+/**
+ * Clase de Administrador del Sistema.
+ * 
+ * @author Ramiro Borgo
+ * @author Martin Bourlot
+ * @author Fabian Brites
+ * @author Juan Fracisco Riveras
+ * @author Nicolas Ornetti
+ * @version 1.0
+ */
 
 public class Usuarios  {
 

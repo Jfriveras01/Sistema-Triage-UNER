@@ -1,6 +1,16 @@
 package com.miapp.triage.triage;
 import java.util.List;
 
+/**
+ * Clase de Administrador del Sistema.
+ * 
+ * @author Ramiro Borgo
+ * @author Martin Bourlot
+ * @author Fabian Brites
+ * @author Juan Fracisco Riveras
+ * @author Nicolas Ornetti
+ * @version 1.0
+ */
 
 public class Sector {
 

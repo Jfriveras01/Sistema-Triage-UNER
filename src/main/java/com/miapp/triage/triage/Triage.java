@@ -2,7 +2,16 @@ package com.miapp.triage.triage;
 import java.io.Serializable;
 import java.util.Date;
 
-
+/**
+ * Clase de Administrador del Sistema.
+ * 
+ * @author Ramiro Borgo
+ * @author Martin Bourlot
+ * @author Fabian Brites
+ * @author Juan Fracisco Riveras
+ * @author Nicolas Ornetti
+ * @version 1.0
+ */
 
 public class Triage implements Serializable {
 
@@ -33,6 +42,36 @@ public class Triage implements Serializable {
     private String tipourgencia;
     Date fecha;
 
+    
+    /**
+     * 
+     * @param id_triage
+     * @param PuntuacionRespiracion
+     * @param PuntuacionPulso
+     * @param PuntuacionEstMental
+     * @param PuntuacionConciencia
+     * @param PuntuacionDolResp
+     * @param PuntuacionLesGraves
+     * @param PuntuacionEdad
+     * @param PuntuacionFiebre
+     * @param PuntuacionVomitos
+     * @param PuntuacionDolAbdominal
+     * @param PuntuacionSignosShock
+     * @param PuntuacionLesLeves
+     * @param PuntuacionSangrado
+     * @param ColorAsignado
+     * @param MotivoCambio
+     * @param FechaCambio
+     * @param HoraDelCambio
+     * @param paciente
+     * @param consulta
+     * @param enfermero
+     * @param Medico
+     * @param puntuacion
+     * @param tiempoespera
+     * @param tipourgencia
+     * @param fecha 
+     */
     public Triage(int id_triage, int PuntuacionRespiracion, int PuntuacionPulso, int PuntuacionEstMental, int PuntuacionConciencia, int PuntuacionDolResp, int PuntuacionLesGraves, int PuntuacionEdad, int PuntuacionFiebre, int PuntuacionVomitos, int PuntuacionDolAbdominal, int PuntuacionSignosShock, int PuntuacionLesLeves, int PuntuacionSangrado, String ColorAsignado, String MotivoCambio, int FechaCambio, int HoraDelCambio, Paciente paciente, Consulta consulta, PersonalEnfermeria enfermero, Medicos Medico, int puntuacion, String tiempoespera, String tipourgencia, Date fecha) {
         this.id_triage = id_triage;
         this.PuntuacionRespiracion = PuntuacionRespiracion;
