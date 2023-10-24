@@ -7,6 +7,8 @@ import com.miapp.triage.triage.Triage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
+
 
 import javax.swing.JOptionPane;
 
@@ -14,6 +16,9 @@ public class TriageGUI extends javax.swing.JFrame {
 
     private ltriage gestorTriage;
     private lpacientes gestorPaciente;
+    ListaesperaTriage listaesperaTriage = new ListaesperaTriage();
+
+    
     String archivo = "src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv";
     String archivo2 = "src\\main\\java\\com\\miapp\\triage\\csv\\medicos.csv";
     String archivo3 = "src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv";
@@ -21,10 +26,15 @@ public class TriageGUI extends javax.swing.JFrame {
     public TriageGUI() {
         initComponents();
          try {
-            cargarPacientesDesdeArchivo(archivo);
             cargarMedicoDesdeArchivo(archivo2);
             gestorTriage = new ltriage();
             gestorPaciente = new lpacientes();
+            
+            List<String> dniList = listaesperaTriage.obtenerDniDesdeTabla();
+            for (String dni : dniList) {
+                jComboBox5.addItem(dni);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -315,7 +325,7 @@ public class TriageGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Pacientenuevo pacinuev = new Pacientenuevo();
+        TriagemenuGUI pacinuev = new TriagemenuGUI();
         pacinuev.setVisible(true);
         pacinuev.setLocationRelativeTo(null);
         this.setVisible(false);
@@ -345,7 +355,6 @@ public class TriageGUI extends javax.swing.JFrame {
         PuntuacionLesLeves, PuntuacionSangrado);
 
         int puntuacion = triage.getpuntuacion();
-        JOptionPane.showMessageDialog(this, "La puntuacion del triage es:: " + puntuacion);
                
         //////
         
@@ -366,6 +375,7 @@ public class TriageGUI extends javax.swing.JFrame {
         paci.setDNI(DniSeleccionado);
         triage.setPaciente(paci);
         
+        
         String medicoSeleccionado = (jComboBox6.getSelectedItem().toString());
         Medicos medico = new Medicos();
         medico.setNombre(medicoSeleccionado);
@@ -375,7 +385,8 @@ public class TriageGUI extends javax.swing.JFrame {
         gestorTriage.agregar(triage);
         gestorTriage.escribirArchivo(archivo3,";", true);
 
-        
+        JOptionPane.showMessageDialog(this, "La puntuacion del triage es: " + puntuacion);
+        volverAtras();
         /////
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -406,29 +417,13 @@ public class TriageGUI extends javax.swing.JFrame {
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox6ActionPerformed
-
-    private void cargarPacientesDesdeArchivo(String archivo) throws IOException {
-    BufferedReader br = null;
-    try {
-        br = new BufferedReader(new FileReader(archivo));
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] datos = linea.split(";");
-            
-            if (datos.length >= 6) {
-                String Dni = datos[5];
-                
-                jComboBox5.addItem(Dni);
-            }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    } finally {
-        if (br != null) {
-            br.close();
-        }
-    }
-}                                 
+                          
+    private void volverAtras() {
+    TriagemenuGUI pacinuev = new TriagemenuGUI();
+    pacinuev.setVisible(true);
+    pacinuev.setLocationRelativeTo(null);
+    this.setVisible(false);
+}
     
      private void cargarMedicoDesdeArchivo(String archivo2) throws IOException {
     BufferedReader br = null;

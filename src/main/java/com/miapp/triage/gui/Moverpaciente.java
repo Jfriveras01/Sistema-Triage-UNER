@@ -254,7 +254,23 @@ public class Moverpaciente extends javax.swing.JFrame {
         // TODO add your handling code here
         String dniSeleccionado = jComboBox1.getSelectedItem().toString();
         int idTriage = encontrarIdPorDni(dniSeleccionado);
-        gestorTriage.eliminar(idTriage);
+
+
+        
+
+        for (Triage triage : gestorTriage.getTriages()) {
+            if (triage.getId_triage() == idTriage) {
+                gestorTriage.eliminar(idTriage);
+                gestorTriage.escribirArchivo(archivo, ";", false);
+                try {
+                    gestorTriage.leerArchivo(archivo, ";");
+                } catch (IOException ex) {
+                    Logger.getLogger(Moverpaciente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+        }
+        
         System.out.println("el id encontrado fue " + idTriage );
 
         
@@ -271,8 +287,8 @@ public class Moverpaciente extends javax.swing.JFrame {
             System.out.println("Línea leída del archivo: " + lineaPacientes);
             String[] datosPacientes = lineaPacientes.split(";");
             if (datosPacientes.length >= 7) {
-                String dni = datosPacientes[6].trim(); // Elimina espacios en blanco
-                int id = Integer.parseInt(datosPacientes[0].trim()); // Elimina espacios en blanco
+                String dni = datosPacientes[6];
+                int id = Integer.parseInt(datosPacientes[0]);
                 if (dniSeleccionado.equalsIgnoreCase(dni)) { // Comparación sin distinguir mayúsculas/minúsculas
                     idEncontrado = id;
                     System.out.println("ID buscado: " + id);

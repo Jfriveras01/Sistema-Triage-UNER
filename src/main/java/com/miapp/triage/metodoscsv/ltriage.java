@@ -8,7 +8,7 @@ import com.miapp.triage.triage.Medicos;
 import com.miapp.triage.triage.Paciente;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.Iterator;
+
 
 public class ltriage {
     
@@ -17,6 +17,10 @@ public class ltriage {
     ArrayList<String> nombresMedico = new ArrayList<>();
     ArrayList<Long> DniPaciente = new ArrayList<>();
     
+    public ArrayList<Triage> getTriages() {
+        return triage;
+    }
+
     public void agregarNombreMedico(String nombreMedico) {
         nombresMedico.add(nombreMedico);
     }

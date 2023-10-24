@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class EstadisticasONE extends javax.swing.JDialog {
 
     
-    String archivo= "C:\\Users\\iCentro\\Desktop\\taller 2\\Sistema-Triage-UNER\\src\\main\\java\\com\\miapp\\triage\\csv\\Consultas.csv";
+    String archivo= "src\\main\\java\\com\\miapp\\triage\\csv\\Consultas.csv";
     public EstadisticasONE() throws IOException {
         super();
         initComponents();

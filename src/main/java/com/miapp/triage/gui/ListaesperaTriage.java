@@ -7,7 +7,9 @@ package com.miapp.triage.gui;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
@@ -140,6 +142,18 @@ public class ListaesperaTriage extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
+    public List<String> obtenerDniDesdeTabla() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+    List<String> listaDNI = new ArrayList<>();
+
+    for (int fila = 0; fila < modeloTabla.getRowCount(); fila++) {
+        String dni = (String) modeloTabla.getValueAt(fila, 2); 
+        listaDNI.add(dni);
+    }
+
+    return listaDNI;
+}
     
     
     /**

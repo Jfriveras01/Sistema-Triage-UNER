@@ -36,7 +36,7 @@ public class Historialclinica extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Volver");
+        jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -75,9 +75,6 @@ public class Historialclinica extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Menu men = new Menu();
-        men.setVisible(true);
-        men.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
