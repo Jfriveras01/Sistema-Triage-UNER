@@ -42,7 +42,7 @@ public class EstadisticasFOUR extends javax.swing.JDialog {
         jLabel5.setText("Ingresar rango de fechas");
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("        Fecha1");
+        jLabel4.setText("        Fecha2");
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("        Fecha1");
