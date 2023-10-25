@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import javax.swing.JOptionPane;
 
 
@@ -21,8 +22,6 @@ public class EstadisticasFOUR extends javax.swing.JDialog {
         initComponents();
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -141,66 +140,74 @@ public class EstadisticasFOUR extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String fecha1 = jFormattedTextField2.getText();
-        String fecha2 = jFormattedTextField3.getText();
+    int cantidad=0;
+    String fecha1 = jFormattedTextField2.getText();
+    String fecha2 = jFormattedTextField3.getText();
 
-        Map <String, Integer> map= new HashMap<>();
-        
-        if (fecha1.isEmpty() || fecha2.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debes completar todos los campos.");
-            return;
-        }
+    Map<String, Integer> map = new HashMap<>();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false);
+    if (fecha1.isEmpty() || fecha2.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debes completar todos los campos.");
+        return;
+    }
 
-        Date fechauno=null;
-        Date fechados=null;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    sdf.setLenient(false);
 
-        try {
-            fechauno = sdf.parse(fecha1);
-            fechados = sdf.parse(fecha2);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, "El formato de fecha no es válido");
-        }
-        
-         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(";");
+    Date fechauno = null;
+    Date fechados = null;
 
-                if (datos.length == 6) {
-                    Date fechaTriage = sdf.parse(datos[7]);
-                    String Color =(datos[2]);
+    try {
+        fechauno = sdf.parse(fecha1);
+        fechados = sdf.parse(fecha2);
+    } catch (ParseException e) {
+        JOptionPane.showMessageDialog(this, "El formato de fecha no es válido");
+    }
 
-                    if (fechaDentroDelRango(fechaTriage, fechauno, fechados)) {
-                        
+    try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            String[] datos = linea.split(";");
+            if (datos.length == 8) {
+                Date fechaTriage = sdf.parse(datos[7]);
+                String Color = datos[2];
+                if (fechaDentroDelRango(fechaTriage, fechauno, fechados)) {
+                        cantidad++;
                          if (!map.containsKey(Color)) {
                               map.put(Color, 1);
                       } else {
                   
                          int coloresActuales = map.get(Color);
-                        map.put(Color, coloresActuales + 1);
+                         map.put(Color, coloresActuales + 1);
                 }
                     }
-                }
             }
-        } catch (IOException | ParseException ex) {
-            ex.printStackTrace();
         }
-                         
-        StringBuilder contenido = new StringBuilder();
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            String clave = entry.getKey();
-            int valor = entry.getValue();
-            contenido.append(clave).append(": ").append(valor).append("\n");
-        }
-        String contenidoComoString = contenido.toString();
-        JOptionPane.showMessageDialog(this, contenidoComoString);
+    } catch (IOException | ParseException ex) {
+        ex.printStackTrace();
+    }
+
+    StringBuilder mensaje = new StringBuilder();
+    for (Map.Entry<String, Integer> entry : map.entrySet()) {
+        String clave = entry.getKey();
+        int valor = entry.getValue();
+        mensaje.append(clave).append(": ").append(valor).append("\n");
+    }
+
+  
+    if (mensaje.length() == 0) {
+        JOptionPane.showMessageDialog(this, "No se encontraron resultados.");
+    } else {
+         mensaje.insert(0, "La cantidad total de triages que se realizaron en esas fechas es: \n" + "Total: " + cantidad+"\n");
+      
+        JOptionPane.showMessageDialog(this, mensaje.toString());
+    }
+       
+        
     }//GEN-LAST:event_jButton4ActionPerformed
  
-    private boolean fechaDentroDelRango(Date fechaTriage, Date fechauno, Date fechados) {
-       return !fechaTriage.before(fechauno) && !fechaTriage.after(fechados);
+   private boolean fechaDentroDelRango(Date fechaTriage, Date fechauno, Date fechados) {
+    return !fechaTriage.before(fechauno) && !fechaTriage.after(fechados);
 }
     
     

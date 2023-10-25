@@ -161,37 +161,56 @@ public class EstadisticasTHREE extends javax.swing.JDialog {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
 
-                if (datos.length == 6) {
+                if (datos.length == 7) {
                     Date fechaConsulta = sdf.parse(datos[1]);
                     long dni = Long.parseLong(datos[0]);
 
                     if (fechaDentroDelRango(fechaConsulta, fechauno, fechados)) {
-                        
-                         if (!pacienteConsultas.containsKey(dni)) {
-                              pacienteConsultas.put(dni, 1);
-                      } else {
-                  
-                         int consultasActuales = pacienteConsultas.get(dni);
-                         pacienteConsultas.put(dni, consultasActuales + 1);
+                    pacienteConsultas.put(dni, pacienteConsultas.getOrDefault(dni, 0) + 1);
                 }
-                    }
                 }
             }
         } catch (IOException | ParseException ex) {
             ex.printStackTrace();
         }
 
-        for (int consultas : pacienteConsultas.values()) {
-             maxConsultas = Math.max(maxConsultas, consultas);
-        }
-        
-        ArrayList<Long> pacientesMasConsultas = new ArrayList<>();
-        for (Map.Entry<Long, Integer> entry : pacienteConsultas.entrySet()) {
-            if (entry.getValue() == maxConsultas) {
-                pacientesMasConsultas.add(entry.getKey());
-            }
-        }
+     
+        Map<Long, Integer> pacientesMasConsultas = new HashMap<>();
 
+            for (Map.Entry<Long, Integer> entry : pacienteConsultas.entrySet()) {
+                    long dni = entry.getKey();
+                    int consultas = entry.getValue();
+    
+                if (consultas > maxConsultas) {
+                    maxConsultas = consultas;
+                    pacientesMasConsultas.clear(); // Borra los pacientes anteriores si tenían menos consultas
+                    pacientesMasConsultas.put(dni, maxConsultas);
+                } else if (consultas == maxConsultas) {
+                    pacientesMasConsultas.put(dni, maxConsultas);
+                }
+            }
+
+         StringBuilder mensaje = new StringBuilder();
+    for (Map.Entry<Long, Integer> entry : pacientesMasConsultas.entrySet()) {
+        Long clave = entry.getKey();
+        int valor = entry.getValue();
+        mensaje.append(clave).append(": ").append(valor).append("\n");
+    }
+
+  
+    if (mensaje.length() == 0) {
+        JOptionPane.showMessageDialog(this, "No se encontraron resultados.");
+    } else {
+         mensaje.insert(0, "El/Los pacientes que mas consultas tienen en el rango de fechas dados es: : \n");
+      
+        JOptionPane.showMessageDialog(this, mensaje.toString());
+    }
+
+        
+        
+     
+
+       /*
         if (pacientesMasConsultas.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No se encontraron consultas en el rango de fechas especificado.");
         } else {
@@ -204,7 +223,7 @@ public class EstadisticasTHREE extends javax.swing.JDialog {
 
          JOptionPane.showMessageDialog(this, mensaje);
         }
-
+*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
   private boolean fechaDentroDelRango(Date fechaConsulta, Date fechauno, Date fechados) {

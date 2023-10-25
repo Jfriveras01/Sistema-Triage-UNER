@@ -7,7 +7,6 @@ package com.miapp.triage.gui;
 import com.miapp.triage.metodoscsv.lconsulta;
 import com.miapp.triage.triage.BoxAtencion;
 import com.miapp.triage.triage.Consulta;
-import com.miapp.triage.triage.Especialidad;
 import com.miapp.triage.triage.Medicos;
 import com.miapp.triage.triage.Paciente;
 import java.awt.event.ActionEvent;
