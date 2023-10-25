@@ -106,7 +106,7 @@ public class Moverpaciente extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre paciente");
 
-        jLabel4.setText("Urgencia actual");
+        jLabel4.setText("Color actual");
 
         jLabel5.setText("Cambiar a");
 
@@ -159,7 +159,7 @@ public class Moverpaciente extends javax.swing.JFrame {
                             .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(37, 37, 37)
                         .addComponent(jButton2)))
@@ -214,7 +214,7 @@ public class Moverpaciente extends javax.swing.JFrame {
     
     long dniPacienteSeleccionado = Long.parseLong(pacienteSeleccionado);
 
-    String nuevoTipoUrgencia = jComboBox2.getSelectedItem().toString();
+    String nuevoColor = jComboBox2.getSelectedItem().toString();
 
     List<String> lineasActualizadas = new ArrayList<>();
 
@@ -227,7 +227,7 @@ public class Moverpaciente extends javax.swing.JFrame {
                 long dni = Long.parseLong(datos[6]);
                 if (dni == dniPacienteSeleccionado) {
 
-                    datos[1] = nuevoTipoUrgencia;
+                    datos[2] = nuevoColor;
                 }
                 
                 lineasActualizadas.add(String.join(";", datos));
@@ -306,29 +306,43 @@ public class Moverpaciente extends javax.swing.JFrame {
     private void actualizarComboBox() {
         jComboBox2.removeAllItems();
         
-        String urgenciaActual = jTextField2.getText();
+        String colorActual = jTextField2.getText();
                 
-        if ("Riesgo vital inmediato".equals(urgenciaActual)) {
-            jComboBox2.addItem("Muy urgente");
-            jComboBox2.addItem("Urgente");
-            
-        } else if ("Muy urgente".equals(urgenciaActual)) {
-            jComboBox2.addItem("Riesgo vital inmediato");
-            jComboBox2.addItem("Muy urgente");
-            jComboBox2.addItem("Normal");
-            
-        } else if ("Urgente".equals(urgenciaActual)) {
-            jComboBox2.addItem("Riesgo vital inmediato");
-            jComboBox2.addItem("Muy urgente");
-            jComboBox2.addItem("Normal");
-            jComboBox2.addItem("No urgente");
-        } else if ("Normal".equals(urgenciaActual)) {
-            jComboBox2.addItem("Muy urgente");;
-            jComboBox2.addItem("Urgente");;
-            jComboBox2.addItem("No urgente");
-        } else if ("No urgente".equals(urgenciaActual)) {
-            jComboBox2.addItem("Urgente");
-            jComboBox2.addItem("Normal");
+        if (null != colorActual) switch (colorActual) {
+            case "Rojo" -> {
+                jComboBox2.addItem("Naranja");
+                jComboBox2.addItem("Amarillo");
+                jComboBox2.addItem("Verde");
+                jComboBox2.addItem("azul");
+            }
+            case "Amarillo" -> {
+                jComboBox2.addItem("Naranja");
+                jComboBox2.addItem("Verde");
+                jComboBox2.addItem("azul");
+                jComboBox2.addItem("Rojo");
+            }
+            case "Naranja" -> {
+                jComboBox2.addItem("Rojo");
+                jComboBox2.addItem("Amarillo");
+                jComboBox2.addItem("Verde");
+                jComboBox2.addItem("azul");
+            }
+            case "azull" -> {
+                jComboBox2.addItem("Rojo");
+                ;
+                jComboBox2.addItem("Amarillo");
+                ;
+                jComboBox2.addItem("Verde");
+                jComboBox2.addItem("Naranja");
+            }
+            case "Verde" -> {
+                jComboBox2.addItem("azul");
+                jComboBox2.addItem("Amarillo");
+                jComboBox2.addItem("Naranja");
+                jComboBox2.addItem("Rojo");
+            }
+            default -> {
+            }
         }
         
     }
@@ -344,7 +358,7 @@ public class Moverpaciente extends javax.swing.JFrame {
             if (datos.length >= 6) {
                 String Dni = datos[6];
                 
-                // Agregar el nombre completo al ComboBox
+             
                 jComboBox1.addItem(Dni);
             }
         }
@@ -361,22 +375,22 @@ public class Moverpaciente extends javax.swing.JFrame {
         
         String paciente = jComboBox1.getSelectedItem().toString();
         
-        String infoUrgencia = cargarUrgencia(paciente);
+        String infoColor = cargarColor(paciente);
         String nombrePaciente = cargarNombrePaciente(paciente);
         
-        jTextField2.setText(infoUrgencia);
+        jTextField2.setText(infoColor);
         jTextField1.setText(nombrePaciente);
     }
     
-    private String cargarUrgencia(String paciente){
+    private String cargarColor(String paciente){
         try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\triage.csv"))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] datos = linea.split(";");
-            String urgencia = datos[6];
-            if (urgencia.equals(paciente)) {
+            Long dni = Long.parseLong(datos[6]);
+            if (dni.toString().equals(paciente)) {
 
-                return datos[1]; 
+                return datos[2]; 
             }
         }
     } catch (IOException e) {
