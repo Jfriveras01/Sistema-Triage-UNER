@@ -312,34 +312,30 @@ public class Moverpaciente extends javax.swing.JFrame {
             case "Rojo" -> {
                 jComboBox2.addItem("Naranja");
                 jComboBox2.addItem("Amarillo");
-                jComboBox2.addItem("Verde");
-                jComboBox2.addItem("azul");
+              
+            }
+             case "Naranja" -> {
+                jComboBox2.addItem("Rojo");
+                jComboBox2.addItem("Amarillo");
+                jComboBox2.addItem("Verde");            
+           
             }
             case "Amarillo" -> {
+                jComboBox2.addItem("Rojo");
                 jComboBox2.addItem("Naranja");
-                jComboBox2.addItem("Verde");
                 jComboBox2.addItem("azul");
-                jComboBox2.addItem("Rojo");
-            }
-            case "Naranja" -> {
-                jComboBox2.addItem("Rojo");
-                jComboBox2.addItem("Amarillo");
                 jComboBox2.addItem("Verde");
-                jComboBox2.addItem("azul");
             }
             case "azull" -> {
-                jComboBox2.addItem("Rojo");
-                ;
                 jComboBox2.addItem("Amarillo");
-                ;
                 jComboBox2.addItem("Verde");
-                jComboBox2.addItem("Naranja");
+               
             }
             case "Verde" -> {
-                jComboBox2.addItem("azul");
-                jComboBox2.addItem("Amarillo");
                 jComboBox2.addItem("Naranja");
-                jComboBox2.addItem("Rojo");
+                jComboBox2.addItem("Amarillo");
+                jComboBox2.addItem("azul");
+               
             }
             default -> {
             }

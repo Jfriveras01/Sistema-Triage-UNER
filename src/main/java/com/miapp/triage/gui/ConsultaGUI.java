@@ -151,7 +151,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Diagnostico");
+        jLabel9.setText("Motivo Consulta");
 
         jButton3.setText("Historia clinica");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +160,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Diagnostico clinco");
+        jLabel10.setText("Diagnostico clinico");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,8 +199,8 @@ public class ConsultaGUI extends javax.swing.JFrame {
                         .addComponent(jButton2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
