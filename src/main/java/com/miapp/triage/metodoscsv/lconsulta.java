@@ -110,6 +110,7 @@ public class lconsulta {
                     nombresMedicos.add(nombreMedico);
                 
                 con.setDiagnostico(campos[6]);
+                con.setDiagClinico(campos[7]);
 
                 this.agregar(con);
             } else {
@@ -141,6 +142,7 @@ public class lconsulta {
             linea += con.getHora() + separador;
             linea += con.getLugar() + separador;
             linea += con.getDiagnostico() + separador;
+            linea += con.getDiagClinico() + separador;
             
             BoxAtencion boxAtencion = con.getBoxAtencion();
             if (boxAtencion != null) {

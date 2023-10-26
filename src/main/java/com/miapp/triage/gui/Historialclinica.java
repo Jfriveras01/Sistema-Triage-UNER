@@ -4,6 +4,13 @@
  */
 package com.miapp.triage.gui;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Fran
@@ -13,6 +20,7 @@ public class Historialclinica extends javax.swing.JFrame {
     /**
      * Creates new form Historialclinica
      */
+    
     public Historialclinica() {
         initComponents();
     }
@@ -26,48 +34,46 @@ public class Historialclinica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Elegir paciente");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton1.setText("Cerrar");
+        jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Paciente", "Fecha", "Hora", "Lugar", "Medico", "Diagnostico"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
+                .addGap(315, 315, 315)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(jButton1)
-                .addGap(26, 26, 26))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,9 +81,74 @@ public class Historialclinica extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ConsultaGUI consul = new ConsultaGUI();
+        consul.setVisible(true);
+        consul.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+
+    
+    public void cargarDatosPaciente(String dniPaciente) {
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    modeloTabla.addColumn("Paciente");
+    modeloTabla.addColumn("Fecha");
+    modeloTabla.addColumn("Hora");
+    modeloTabla.addColumn("Lugar");
+    modeloTabla.addColumn("Médico");
+    modeloTabla.addColumn("Diagnóstico");
+
+    try {
+        BufferedReader brConsulta = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\Consultas.csv"));
+        BufferedReader brPacientes = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv"));
+        String lineaConsulta;
+        String lineaPacientes;
+
+        // Crear un mapa para almacenar el nombre de los pacientes
+        Map<String, String> nombresPacientes = new HashMap<>();
+
+        while ((lineaPacientes = brPacientes.readLine()) != null) {
+            String[] datosPacientes = lineaPacientes.split(";");
+            if (datosPacientes.length >= 10) {
+                String dni = datosPacientes[5];
+                String nombre = datosPacientes[1];
+                String apellido = datosPacientes[2];
+                String nombreCompleto = nombre + " " + apellido;
+                nombresPacientes.put(dni, nombreCompleto);
+            }
+        }
+
+        while ((lineaConsulta = brConsulta.readLine()) != null) {
+            String[] datosConsulta = lineaConsulta.split(";");
+            if (datosConsulta.length >= 8) {
+                String dni = datosConsulta[0];
+                if (dni.equals(dniPaciente)) {
+                    String Fecha = datosConsulta[1];
+                    String Hora = datosConsulta[2];
+                    String Lugar = datosConsulta[3];
+                    String Medico = datosConsulta[7];
+                    String Diagnostico = datosConsulta[5];
+                    
+                    // Obtén el nombre del paciente desde el mapa
+                    String nombrePaciente = nombresPacientes.get(dniPaciente);
+
+                    // Agrega una fila al modelo de datos
+                    modeloTabla.addRow(new Object[] {nombrePaciente, Fecha, Hora, Lugar, Medico, Diagnostico});
+                }
+            }
+        }
+
+        brConsulta.close();
+        brPacientes.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    // Asigna el modelo de datos a la tabla
+    jTable1.setModel(modeloTabla);
+}
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -115,7 +186,7 @@ public class Historialclinica extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

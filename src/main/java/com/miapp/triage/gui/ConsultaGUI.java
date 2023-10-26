@@ -44,7 +44,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
         gestorConsulta = new lconsulta();
         jTextField1.setEditable(false);
         cargarMedicoDesdeArchivo(archivo2);
-        
+        Historialclinica historial = new Historialclinica();
         List<String> dniList = listaespera.obtenerDniDesdeTabla();
             for (String dni : dniList) {
                 jComboBox2.addItem(dni);
@@ -54,6 +54,8 @@ public class ConsultaGUI extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarPuntuacionPaciente();
+                
+
             }
         });
     } catch (IOException ex) {
@@ -90,6 +92,8 @@ public class ConsultaGUI extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,10 +160,16 @@ public class ConsultaGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Diagnostico clinco");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,20 +192,20 @@ public class ConsultaGUI extends javax.swing.JFrame {
                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                            .addComponent(jTextField3))))
                 .addGap(53, 53, 53))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +244,11 @@ public class ConsultaGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -315,10 +329,15 @@ public class ConsultaGUI extends javax.swing.JFrame {
     medico.setNombre(medicoSeleccionado);
     con.setMedico(medico);
     
+    con.setDiagnostico(jTextField2.getText());
+    con.setDiagClinico(jTextField3.getText());
     gestorConsulta.agregar(con);
     gestorConsulta.escribirArchivo(archivo3, ";", true);
     jFormattedTextField1.setText("");
     jFormattedTextField2.setText("");
+    jTextField2.setText("");
+    jTextField1.setText("");
+    jTextField3.setText("");
     jComboBox1.setSelectedIndex(-1); // Deselecciona el elemento del JComboBox
 
     ////////////
@@ -328,7 +347,12 @@ public class ConsultaGUI extends javax.swing.JFrame {
     private void cargarPuntuacionPaciente() {
     String pacienteSeleccionado = jComboBox2.getSelectedItem().toString();
     String puntu = cargarPuntuacion(pacienteSeleccionado);
+    String diagpaci = cargarDiagnostico(pacienteSeleccionado);
+    jTextField2.setText(diagpaci);
     jTextField1.setText(puntu);
+    
+    jTextField1.setEditable(false);
+    jTextField2.setEditable(false);
 }
     
    private String cargarPuntuacion(String pacienteSeleccionado) {
@@ -350,7 +374,26 @@ public class ConsultaGUI extends javax.swing.JFrame {
     // Si el médico no se encuentra, devuelve un mensaje o una cadena vacía
     return "Información no encontrada";
 }
+   
+    private String cargarDiagnostico (String pacienteSeleccionado) {
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\pacientes.csv"))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            String[] datos = linea.split(";");
+            if (datos.length > 5) {
+                String dni = datos[5];
+                if (dni.equals(pacienteSeleccionado)) {
+                    return datos[10]; 
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     
+    // Si el médico no se encuentra, devuelve un mensaje o una cadena vacía
+    return "Información no encontrada";
+}
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -366,9 +409,19 @@ public class ConsultaGUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Historialclinica histo = new Historialclinica();
-        histo.setVisible(true);
-        histo.setLocationRelativeTo(null);
+        // Obtiene el DNI del paciente seleccionado
+        String dniSeleccionado = (String) jComboBox2.getSelectedItem();
+
+        // Crea una instancia de Historialclinica
+        Historialclinica historiaClinica = new Historialclinica();
+
+        // Carga y muestra los datos de la historia clínica para el paciente seleccionado
+        historiaClinica.cargarDatosPaciente(dniSeleccionado);
+
+        // Muestra la ventana de Historia clínica
+        historiaClinica.setVisible(true);
+        historiaClinica.setLocationRelativeTo(this);
+        this.setVisible(false);
         
     }//GEN-LAST:event_jButton3ActionPerformed
     
@@ -448,6 +501,7 @@ public class ConsultaGUI extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -458,5 +512,6 @@ public class ConsultaGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

@@ -101,7 +101,9 @@ public class MedicosGUI extends javax.swing.JFrame {
     
     private void cargarDatosDesdeCSV() {
     DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
-    modeloTabla.setRowCount(0); 
+    modeloTabla.setRowCount(0);
+    
+    
 
     try {
         BufferedReader brMedicos = new BufferedReader(new FileReader("src\\main\\java\\com\\miapp\\triage\\csv\\medicos.csv"));
