@@ -37,7 +37,8 @@ public class Sector {
     }
 
     //GETTERS Y SETTERS
-    /** Retorna el nombre del sector*/
+    /** Retorna el nombre del secto
+     * @return r*/
     public String getNombre() {
 
         return nombre;
@@ -50,7 +51,8 @@ public class Sector {
 
         this.nombre = nombre;
     }
-    /** Retorna el código de sector*/
+    /** Retorna el código de secto
+     * @return r*/
     public int getCod() {
 
         return Cod;
@@ -63,7 +65,8 @@ public class Sector {
 
         Cod = cod;
     }
-    /** Retorna la lista de funcionarios administrativos de sector*/
+    /** Retorna la lista de funcionarios administrativos de secto
+     * @return r*/
     public List<FuncionarioAdministrativo> getFunadmin() {
         return Funadmins;
     }

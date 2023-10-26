@@ -182,7 +182,7 @@ public class Triage implements Serializable {
     public int getPuntuacionEstMental() {
         return PuntuacionEstMental;
     }
-    /** Permite modificar la puntuación de estado menta
+    /** Permite modificar la puntuación de estado mental
      * @param puntuacionEstMental*/
     public void setPuntuacionEstMental(int puntuacionEstMental) {
         PuntuacionEstMental = puntuacionEstMental;

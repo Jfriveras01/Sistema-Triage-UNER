@@ -146,7 +146,8 @@ public class Persona  {
     public void setTelfijo(long Telfijo) {
         this.Telfijo = Telfijo;
     }
-    /** Retorna el número de teléfono celular de persona*/
+    /** Retorna el número de teléfono celular de person
+     * @return */
     public long getTelcelular() {
         return Telcelular;
     }
@@ -157,7 +158,8 @@ public class Persona  {
     public void setTelcelular(long Telcelular) {
         this.Telcelular = Telcelular;
     }
-    /** Retorna el estado civil de persona*/
+    /** Retorna el estado civil de person
+     * @return */
     public String getEstcivil() {
         return Estcivil;
     }
@@ -168,7 +170,8 @@ public class Persona  {
     public void setEstcivil(String Estcivil) {
         this.Estcivil = Estcivil;
     }
-    /** Retorna la dirección de correo electrónico de persona*/
+    /** Retorna la dirección de correo electrónico de person
+     * @return */
     public String getCorreo() {
         return correo;
     }
